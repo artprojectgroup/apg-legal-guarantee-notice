@@ -5,7 +5,7 @@ Tags: legal guarantee, consumer rights, woocommerce, eu, conformity
 Requires at least: 6.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 WC requires at least: 7.0
 WC tested up to: 11.1.2
 License: GNU General Public License v3 or later
@@ -26,7 +26,7 @@ Since **27 September 2026**, Article 22a of Directive 2011/83/EU requires every 
 * Opens in a modal on the first click, the pattern the Commission's practical guidelines illustrate, built with the native popover API and no JavaScript at all.
 * Four placements, each with its own settings: a floating button in any of six positions, the last item of any menu, the footer, and the checkout above the place-order button.
 * Every placement chooses its own wording style — text, icon and text, or icon only — and its own colours, hover colours and font size, all starting on "inherit from the theme".
-* In the customer order emails, which the guidelines also ask for.
+* In the customer order emails, which the guidelines also ask for, with the official PDF attached in the customer's language.
 * The clickable link to Your Europe that has to accompany the notice, in the right language.
 * A national note beside the notice for the three-year legal guarantee of Article 120.1 TRLGDCU in Spain, which the uneditable European notice cannot state.
 * Your own guarantee terms, with a starting text you edit, and a button that creates a page holding both and selects it as your terms page.
@@ -34,6 +34,7 @@ Since **27 September 2026**, Article 22a of Directive 2011/83/EU requires every 
 * Warns you in the dashboard when no placement is enabled and the notice would not be reaching anyone.
 * WPML and Polylang ready for the wording you write, through `wpml-config.xml` and runtime string registration.
 * The notice is cached by the browser for a year, so it costs one request per visitor.
+* Works with or without WooCommerce: with it the notice reaches the checkout and the order emails, without it everything else still works.
 * No colour, border or font is set by the plugin unless you ask for it, so it inherits the look of your theme, dark themes included.
 
 = Translations =
@@ -81,12 +82,21 @@ No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covere
 2. The settings screen.
 
 == Changelog ==
+= 0.2.0 =
+* WooCommerce is no longer required: without it the settings move under Settings and the checkout and order email placements are hidden.
+* The customer order email now carries the official PDF of the notice as an attachment, in the customer's language.
+
+= 0.1.1 =
+* The three-year Spanish guarantee note now follows the shop's country instead of the site's language.
+
 = 0.1.0 =
 * First release.
 
 == Upgrade Notice ==
-= 0.1.0 =
-* First release.
+= 0.2.0 =
+* WooCommerce is no longer required: without it the settings move under Settings and the checkout and order email placements are hidden.
+* The customer order email now carries the official PDF of the notice as an attachment, in the customer's language.
+
 
 == Thanks ==
 Thanks to everyone who uses the plugin, helps improve it, makes a donation or encourages us with their comments.
@@ -95,9 +105,9 @@ If you find this plugin useful, you can support its development with a [small do
 
 == The bundled notice files ==
 
-The 24 SVG files under `assets/notices/` are the official harmonised notice on the legal guarantee of conformity, as published by the European Commission and as Commission Implementing Regulation (EU) 2025/1960 fixes it. They are not the plugin's own work and they are not covered by its GPL licence: they are European Commission documents, reused under Commission Decision 2011/833/EU, which authorises the reuse of Commission documents free of charge provided the source is acknowledged. The source is acknowledged here and beside the notice itself, which links to the Commission's Your Europe portal.
+The 24 SVG and 24 PDF files under `assets/notices/` are the official harmonised notice on the legal guarantee of conformity, as published by the European Commission and as Commission Implementing Regulation (EU) 2025/1960 fixes it. They are not the plugin's own work and they are not covered by its GPL licence: they are European Commission documents, reused under Commission Decision 2011/833/EU, which authorises the reuse of Commission documents free of charge provided the source is acknowledged. The source is acknowledged here and beside the notice itself, which links to the Commission's Your Europe portal.
 
-The plugin never edits them. They are stored gzipped only to keep the download small, and gzip is lossless, so the bytes that leave your server are the bytes the Commission published.
+The plugin never edits them. The SVG files are stored gzipped only to keep the download small, and gzip is lossless, so the bytes that leave your server are the bytes the Commission published. The PDFs are stored as they came, because a PDF already carries its own compression.
 
 == External services ==
 

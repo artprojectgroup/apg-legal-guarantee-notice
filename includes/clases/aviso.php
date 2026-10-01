@@ -114,6 +114,32 @@ function apg_guarantee_notice_path( $language ) {
 }
 
 /**
+ * Absolute path of the official PDF of the notice for a language.
+ *
+ * The same artwork as the SVG and from the same place: the Commission publishes
+ * both in its asset pack. The PDF is what travels attached to the order email,
+ * because that is the format a customer can file, print and open anywhere, and
+ * because it is the Commission's own file rather than anything this plugin drew.
+ *
+ * They are not gzipped like the SVG: a PDF carries its own compression and
+ * packing it again saves nothing.
+ *
+ * @param string $language Two-letter language code.
+ * @return string Path, or empty string when there is no file for it.
+ */
+function apg_guarantee_notice_pdf_path( $language ) {
+	$language = strtolower( (string) $language );
+
+	if ( ! in_array( $language, APG_GUARANTEE_LANGUAGES, true ) ) {
+		return '';
+	}
+
+	$path = plugin_dir_path( apg_guarantee_DIRECCION ) . 'assets/notices/notice-' . $language . '.pdf';
+
+	return file_exists( $path ) ? $path : '';
+}
+
+/**
  * URL the notice is served from.
  *
  * @param string $language Two-letter language code.

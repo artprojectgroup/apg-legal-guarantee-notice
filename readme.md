@@ -12,7 +12,7 @@ Tested up to: 7.2
 
 Requires PHP: 7.4
 
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 
 WC requires at least: 7.0
 
@@ -100,6 +100,15 @@ No. Aquel es el artículo 11 bis, que añadió la Directiva (UE) 2023/2673, y lo
 
 ## Changelog
 
+### 0.2.0
+
+* WooCommerce deja de ser obligatorio: sin él los ajustes pasan a Ajustes y se ocultan las ubicaciones de checkout y correo.
+* El correo de pedido del cliente lleva ahora adjunto el PDF oficial del aviso, en el idioma del cliente.
+
+### 0.1.1
+
+* La nota de los tres años de España ahora depende del país de la tienda y no del idioma del sitio.
+
 ### 0.1.0
 
 - Versión inicial.
@@ -112,9 +121,9 @@ Si te resulta útil este plugin, puedes apoyar su desarrollo con una [pequeña d
 
 ## Los ficheros del aviso
 
-Los 24 SVG de `assets/notices/` son el aviso armonizado oficial sobre la garantía legal de conformidad, tal y como lo publica la Comisión Europea y como lo fija el Reglamento de Ejecución (UE) 2025/1960. No son obra del plugin ni están cubiertos por su licencia GPL: son documentos de la Comisión Europea, reutilizados al amparo de la Decisión 2011/833/UE, que autoriza la reutilización de los documentos de la Comisión de forma gratuita siempre que se cite la fuente. La fuente se cita aquí y junto al propio aviso, que enlaza al portal Tu Europa de la Comisión.
+Los 24 SVG y los 24 PDF de `assets/notices/` son el aviso armonizado oficial sobre la garantía legal de conformidad, tal y como lo publica la Comisión Europea y como lo fija el Reglamento de Ejecución (UE) 2025/1960. No son obra del plugin ni están cubiertos por su licencia GPL: son documentos de la Comisión Europea, reutilizados al amparo de la Decisión 2011/833/UE, que autoriza la reutilización de los documentos de la Comisión de forma gratuita siempre que se cite la fuente. La fuente se cita aquí y junto al propio aviso, que enlaza al portal Tu Europa de la Comisión.
 
-El plugin no los edita nunca. Viajan comprimidos con gzip sólo para que la descarga sea pequeña, y gzip no pierde nada, así que los bytes que salen de tu servidor son los que publicó la Comisión.
+El plugin no los edita nunca. Los SVG viajan comprimidos con gzip sólo para que la descarga sea pequeña, y gzip no pierde nada, así que los bytes que salen de tu servidor son los que publicó la Comisión. Los PDF van tal cual llegaron, porque un PDF ya trae su propia compresión.
 
 ## Servicios externos
 

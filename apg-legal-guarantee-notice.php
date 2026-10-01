@@ -1,8 +1,7 @@
 <?php
 /*
 Plugin Name: APG Legal Guarantee Notice
-Requires Plugins: woocommerce
-Version: 0.1.0
+Version: 0.2.0
 Plugin URI: https://artprojectgroup.es/plugins-para-woocommerce/apg-aviso-de-garantia-legal-para-woocommerce
 Description: Shows the official EU harmonised notice on the legal guarantee of conformity, as Article 22a of Directive 2011/83/EU requires since 27 September 2026.
 Author URI: https://artprojectgroup.es/
@@ -24,7 +23,7 @@ Domain Path: /languages
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'apg_guarantee_VERSION', '0.1.0' );
+define( 'apg_guarantee_VERSION', '0.2.0' );
 define( 'apg_guarantee_DIRECCION', __FILE__ );
 
 /**
@@ -97,31 +96,72 @@ function apg_guarantee_registra_opciones() {
 add_action( 'admin_init', 'apg_guarantee_registra_opciones' );
 
 /**
+ * Whether WooCommerce is running.
+ *
+ * Article 22a binds anyone selling goods to consumers, not only shops built on a
+ * particular plugin, so WooCommerce is welcome but not required. Everything that
+ * depends on it asks here first.
+ *
+ * @return bool
+ */
+function apg_guarantee_con_woocommerce() {
+	return class_exists( 'WooCommerce' );
+}
+
+/**
+ * The capability that governs the settings screen.
+ *
+ * With WooCommerce the screen lives in its menu and follows its capability, so a
+ * shop manager reaches it. Without WooCommerce neither the menu nor the
+ * capability exists, and the screen belongs under Settings.
+ *
+ * @return string
+ */
+function apg_guarantee_capacidad() {
+	return apg_guarantee_con_woocommerce() ? 'manage_woocommerce' : 'manage_options';
+}
+
+/**
  * Lets whoever can open this screen also save it.
  *
- * The screen is registered with `manage_woocommerce`, which is how WooCommerce
- * gates its own settings, but `options.php` asks for `manage_options` unless it
- * is told otherwise. Without this a shop manager could open the screen, change
- * everything and be refused on save, which is the worst of the two answers.
+ * `options.php` asks for `manage_options` unless it is told otherwise. Without
+ * this a shop manager could open the screen, change everything and be refused on
+ * save, which is the worst of the two answers.
  *
  * @return string
  */
 function apg_guarantee_capacidad_opciones() {
-	return 'manage_woocommerce';
+	return apg_guarantee_capacidad();
 }
 add_filter( 'option_page_capability_apg_guarantee_settings_group', 'apg_guarantee_capacidad_opciones' );
 
 /**
- * Adds the settings page under the WooCommerce menu.
+ * Adds the settings page: under WooCommerce when it is there, under Settings
+ * when it is not.
  *
  * @return void
  */
 function apg_guarantee_admin_menu() {
-	add_submenu_page(
-		'woocommerce',
-		esc_attr__( 'Legal guarantee notice', 'apg-legal-guarantee-notice' ),
-		esc_attr__( 'Legal guarantee', 'apg-legal-guarantee-notice' ),
-		'manage_woocommerce',
+	$titulo = esc_attr__( 'Legal guarantee notice', 'apg-legal-guarantee-notice' );
+	$menu   = esc_attr__( 'Legal guarantee', 'apg-legal-guarantee-notice' );
+
+	if ( apg_guarantee_con_woocommerce() ) {
+		add_submenu_page(
+			'woocommerce',
+			$titulo,
+			$menu,
+			apg_guarantee_capacidad(),
+			'apg-legal-guarantee-notice',
+			'apg_guarantee_pantalla_ajustes'
+		);
+
+		return;
+	}
+
+	add_options_page(
+		$titulo,
+		$menu,
+		apg_guarantee_capacidad(),
 		'apg-legal-guarantee-notice',
 		'apg_guarantee_pantalla_ajustes'
 	);
@@ -135,7 +175,9 @@ add_action( 'admin_menu', 'apg_guarantee_admin_menu' );
  * @return array
  */
 function apg_guarantee_enlace_ajustes( $links ) {
-	$url = admin_url( 'admin.php?page=apg-legal-guarantee-notice' );
+	$url = admin_url(
+		( apg_guarantee_con_woocommerce() ? 'admin.php' : 'options-general.php' ) . '?page=apg-legal-guarantee-notice'
+	);
 
 	array_unshift(
 		$links,
@@ -146,22 +188,3 @@ function apg_guarantee_enlace_ajustes( $links ) {
 }
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'apg_guarantee_enlace_ajustes' );
 
-/**
- * Warns when WooCommerce is missing. `Requires Plugins` already stops the
- * activation on WordPress 6.5 and later; this covers an older install and the
- * case of WooCommerce being deactivated afterwards.
- *
- * @return void
- */
-function apg_guarantee_requiere_wc() {
-	if ( class_exists( 'WooCommerce' ) || ! current_user_can( 'activate_plugins' ) ) {
-		return;
-	}
-	?>
-<div class="notice notice-error">
-    <p><?php esc_html_e( 'APG Legal Guarantee Notice requires WooCommerce to be installed and active.', 'apg-legal-guarantee-notice' ); ?>
-    </p>
-</div>
-<?php
-}
-add_action( 'admin_notices', 'apg_guarantee_requiere_wc' );

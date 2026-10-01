@@ -70,12 +70,61 @@ function apg_guarantee_get_settings() {
 }
 
 /**
+ * The country the shop sells from.
+ *
+ * Deliberately never guessed from the language: `es` is Spanish, not Spain, and
+ * a shop in Mexico or Argentina running WordPress in Spanish is not governed by
+ * Spanish consumer law.
+ *
+ * @return string Two-letter ISO country code, or an empty string when unknown.
+ */
+function apg_guarantee_shop_country() {
+	if ( function_exists( 'wc_get_base_location' ) ) {
+		$base = wc_get_base_location();
+
+		if ( ! empty( $base['country'] ) ) {
+			return strtoupper( (string) $base['country'] );
+		}
+	}
+
+	// WooCommerce stores it as `ES` or as `ES:MA`, country first either way.
+	$guardado = (string) get_option( 'woocommerce_default_country', '' );
+
+	if ( '' !== $guardado ) {
+		return strtoupper( substr( $guardado, 0, 2 ) );
+	}
+
+	return '';
+}
+
+/**
+ * Whether the shop sits in a country whose own law grants more than the notice
+ * says, and therefore needs the national note beside it.
+ *
+ * Spain is the only one the plugin knows a divergence for: Article 120.1 TRLGDCU
+ * raises the legal guarantee on new goods to three years, where the European
+ * notice states the two-year minimum and cannot be edited to say otherwise.
+ *
+ * @return bool
+ */
+function apg_guarantee_national_note_applies() {
+	/**
+	 * Filters the countries that get the national note beside the notice.
+	 *
+	 * @param array $paises Two-letter ISO country codes.
+	 */
+	$paises = (array) apply_filters( 'apg_guarantee_national_note_countries', array( 'ES' ) );
+
+	return in_array( apg_guarantee_shop_country(), array_map( 'strtoupper', $paises ), true );
+}
+
+/**
  * Whether the national note should be on out of the box.
  *
  * @return string '1' or '0'.
  */
 function apg_guarantee_default_national_note_enabled() {
-	return 0 === strpos( get_locale(), 'es' ) ? '1' : '0';
+	return apg_guarantee_national_note_applies() ? '1' : '0';
 }
 
 /**
@@ -132,7 +181,10 @@ function apg_guarantee_default_national_note() {
  * @return string
  */
 function apg_guarantee_default_terms_text() {
-	$spanish = 0 === strpos( get_locale(), 'es' );
+	// Same decision as the national note, and for the same reason: what the
+	// shop owes its customers follows from where the shop is, not from the
+	// language its website happens to be written in.
+	$spanish = apg_guarantee_national_note_applies();
 
 	$lines = array(
 		__( 'Every item we sell is covered by the legal guarantee of conformity. If what you receive does not match its description, or does not work as it should, you are entitled to have it repaired or replaced free of charge, and where that is not possible, to a price reduction or a refund.', 'apg-legal-guarantee-notice' ),
@@ -196,6 +248,26 @@ function apg_guarantee_placement_args( $placement ) {
 }
 
 /**
+ * The settings that only mean anything with WooCommerce.
+ *
+ * The settings screen hides them when WooCommerce is not there, and a hidden
+ * field is an absent field when the form is posted. The sanitiser needs the same
+ * list so it can tell "the merchant turned this off" from "the merchant never
+ * saw it".
+ *
+ * @return array<int,string>
+ */
+function apg_guarantee_claves_woocommerce() {
+	$claves = array( 'checkout_enabled', 'show_email' );
+
+	foreach ( array( '_style', '_look', '_color', '_background', '_color_hover', '_background_hover', '_font_size' ) as $sufijo ) {
+		$claves[] = 'checkout' . $sufijo;
+	}
+
+	return $claves;
+}
+
+/**
  * Sanitises the settings before they are stored.
  *
  * @param array $options Raw values from the settings form.
@@ -254,6 +326,23 @@ function apg_guarantee_sanitiza_opciones( $options ) {
 	$clean['national_note_text'] = isset( $options['national_note_text'] ) ? sanitize_textarea_field( $options['national_note_text'] ) : '';
 	$clean['terms_text']         = isset( $options['terms_text'] ) ? wp_kses_post( $options['terms_text'] ) : '';
 	$clean['terms_page']         = isset( $options['terms_page'] ) ? (string) absint( $options['terms_page'] ) : '0';
+
+	/*
+	 * Without WooCommerce the checkout and order-email settings are not on the
+	 * screen, so they are not in the post either. Falling through to the
+	 * defaults would read that silence as "switch it off" and quietly wipe what
+	 * the shop had configured, so the stored values are carried over instead and
+	 * come back the day WooCommerce does.
+	 */
+	if ( ! apg_guarantee_con_woocommerce() ) {
+		$previos = (array) get_option( 'apg_guarantee_settings', array() );
+
+		foreach ( apg_guarantee_claves_woocommerce() as $clave ) {
+			if ( isset( $previos[ $clave ] ) ) {
+				$clean[ $clave ] = $previos[ $clave ];
+			}
+		}
+	}
 
 	return $clean;
 }

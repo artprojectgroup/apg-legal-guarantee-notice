@@ -89,7 +89,7 @@ function apg_guarantee_field_appearance( $placement, $settings ) {
  * @return void
  */
 function apg_guarantee_pantalla_ajustes() {
-	if ( ! current_user_can( 'manage_woocommerce' ) ) {
+	if ( ! current_user_can( apg_guarantee_capacidad() ) ) {
 		wp_die( esc_html__( 'You do not have permission to access this page.', 'apg-legal-guarantee-notice' ) );
 	}
 
@@ -241,6 +241,15 @@ function apg_guarantee_pantalla_ajustes() {
 				</tr>
 			</table>
 
+			<?php
+			/*
+			 * Both placements are WooCommerce's: without it there is no checkout to
+			 * print above and no order email to go into. The settings are hidden
+			 * rather than shown doing nothing, and the stored values are left
+			 * untouched so they come back if WooCommerce does.
+			 */
+			if ( apg_guarantee_con_woocommerce() ) :
+				?>
 			<h3><?php esc_html_e( 'Checkout and emails', 'apg-legal-guarantee-notice' ); ?></h3>
 			<table class="form-table apg-table" role="presentation">
 				<tr>
@@ -272,6 +281,8 @@ function apg_guarantee_pantalla_ajustes() {
 					</td>
 				</tr>
 			</table>
+
+			<?php endif; ?>
 
 			<h3><?php esc_html_e( 'Wording', 'apg-legal-guarantee-notice' ); ?></h3>
 			<table class="form-table apg-table" role="presentation">

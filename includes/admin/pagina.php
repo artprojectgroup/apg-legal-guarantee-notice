@@ -53,7 +53,7 @@ function apg_guarantee_handle_create_page() {
 		wp_die( esc_html__( 'Security check failed.', 'apg-legal-guarantee-notice' ) );
 	}
 
-	if ( ! current_user_can( 'manage_woocommerce' ) || ! current_user_can( 'publish_pages' ) ) {
+	if ( ! current_user_can( apg_guarantee_capacidad() ) || ! current_user_can( 'publish_pages' ) ) {
 		wp_die( esc_html__( 'You do not have permission to create this page.', 'apg-legal-guarantee-notice' ) );
 	}
 
@@ -115,7 +115,7 @@ function apg_guarantee_redirect_after_create( $page_id, $result ) {
 				'apg_guarantee_page'     => absint( $page_id ),
 				'apg_guarantee_result_n' => wp_create_nonce( 'apg_guarantee_result' ),
 			),
-			admin_url( 'admin.php' )
+			admin_url( apg_guarantee_con_woocommerce() ? 'admin.php' : 'options-general.php' )
 		)
 	);
 	exit;
@@ -196,7 +196,7 @@ function apg_guarantee_is_shown_anywhere() {
  * @return void
  */
 function apg_guarantee_missing_placement_notice() {
-	if ( ! current_user_can( 'manage_woocommerce' ) || apg_guarantee_is_shown_anywhere() ) {
+	if ( ! current_user_can( apg_guarantee_capacidad() ) || apg_guarantee_is_shown_anywhere() ) {
 		return;
 	}
 
@@ -210,7 +210,7 @@ function apg_guarantee_missing_placement_notice() {
 		esc_html__( 'Article 22a requires it to be displayed at shop level. Turn on the floating button, the menu or the footer, or place it yourself with the shortcode.', 'apg-legal-guarantee-notice' ),
 		$own ? '' : sprintf(
 			' <a href="%1$s">%2$s</a>',
-			esc_url( admin_url( 'admin.php?page=apg-legal-guarantee-notice' ) ),
+			esc_url( admin_url( ( apg_guarantee_con_woocommerce() ? 'admin.php' : 'options-general.php' ) . '?page=apg-legal-guarantee-notice' ) ),
 			esc_html__( 'Open the settings', 'apg-legal-guarantee-notice' )
 		)
 	);

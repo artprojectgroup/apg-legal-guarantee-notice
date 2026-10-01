@@ -21,10 +21,6 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: apg-legal-guarantee-notice.php:148
-msgid "APG Legal Guarantee Notice requires WooCommerce to be installed and active."
-msgstr ""
-
 #: includes/cuadro-informacion.php:16
 msgid "If you enjoy this plugin and find it helpful, please make a donation:"
 msgstr ""
