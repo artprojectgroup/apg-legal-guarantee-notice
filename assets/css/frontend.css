@@ -1,0 +1,314 @@
+@charset "UTF-8";
+
+/*
+ * One rule per look, and no rule that undoes another.
+ *
+ * The earlier version had the floating box and the button inside it both
+ * painting a surface, and a `[style*="--apg-guarantee-bg"]` selector that also
+ * matched `--apg-guarantee-bg-hover`. Between the two, setting a colour gave
+ * results nobody could predict. Now the wrapper only positions, the button owns
+ * every visual decision, and which decisions it makes is chosen by one class:
+ *
+ *   --look-inherit  takes everything from whatever surrounds it (the default)
+ *   --look-link     takes the colours the theme gives its links
+ *   --look-button   carries the theme's own button classes, so the theme paints
+ *                   it and this file says nothing about it at all
+ *   --look-custom   uses the colours the merchant picked
+ *
+ * The only colours named here are `Canvas` and `CanvasText`, the CSS system
+ * colours, which follow the browser and the operating system. They are what
+ * keeps the modal and the floating button readable on a dark theme without the
+ * plugin choosing a palette.
+ */
+
+.apg-guarantee-notice {
+	margin: 1em 0;
+}
+
+/* ---------------------------------------------------------------- the button */
+
+.apg-guarantee-notice__trigger {
+	display: inline-block;
+	margin: 0;
+	padding: 4px 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	line-height: inherit;
+	text-align: left;
+	cursor: pointer;
+	/* WCAG 2.2 target size (2.5.8), reached through spacing rather than by
+	   resizing the control. */
+	min-height: 24px;
+}
+
+/* A plain button reads as a control, not as a word, so it is underlined like
+   the link it stands in for — except where the theme is painting it. */
+.apg-guarantee-notice__trigger--look-inherit,
+.apg-guarantee-notice__trigger--look-link,
+.apg-guarantee-notice__trigger--look-custom {
+	text-decoration: underline;
+}
+
+.apg-guarantee-notice__trigger--look-inherit:hover,
+.apg-guarantee-notice__trigger--look-inherit:focus-visible,
+.apg-guarantee-notice__trigger--look-link:hover,
+.apg-guarantee-notice__trigger--look-link:focus-visible,
+.apg-guarantee-notice__trigger--look-custom:hover,
+.apg-guarantee-notice__trigger--look-custom:focus-visible {
+	text-decoration: none;
+}
+
+/* --look-button adds the theme's button classes and nothing else: no colour,
+   no padding, no radius. Whatever the theme does to its own buttons it does
+   here too, hover and focus included. */
+
+/* --look-link and --look-custom paint from the variables the PHP sets inline.
+   Every one falls back, so a value left empty stays inherited. */
+.apg-guarantee-notice__trigger--look-link,
+.apg-guarantee-notice__trigger--look-custom {
+	background: var(--apg-guarantee-bg, transparent);
+	color: var(--apg-guarantee-fg, inherit);
+	font-size: var(--apg-guarantee-size, inherit);
+}
+
+.apg-guarantee-notice__trigger--look-link:hover,
+.apg-guarantee-notice__trigger--look-link:focus-visible,
+.apg-guarantee-notice__trigger--look-custom:hover,
+.apg-guarantee-notice__trigger--look-custom:focus-visible {
+	background: var(--apg-guarantee-bg-hover, var(--apg-guarantee-bg, transparent));
+	color: var(--apg-guarantee-fg-hover, var(--apg-guarantee-fg, inherit));
+}
+
+/*
+ * Room around the text, but only when a background was actually chosen. The
+ * class is added by the PHP, which knows whether the value is set; a selector
+ * on the inline style cannot tell `--apg-guarantee-bg` from
+ * `--apg-guarantee-bg-hover`, which is what went wrong before.
+ */
+.apg-guarantee-notice__trigger--filled {
+	padding: 8px 14px;
+	border-radius: 4px;
+	text-decoration: none;
+}
+
+/* ---------------------------------------------------------------- text or icon */
+
+.apg-guarantee-notice__trigger--icon_text {
+	display: inline-flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.apg-guarantee-notice__trigger--icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	text-decoration: none;
+}
+
+.apg-guarantee-notice__icon {
+	flex: none;
+}
+
+/* ---------------------------------------------------------------- placements */
+
+/* Positioning only. */
+.apg-guarantee-float {
+	position: fixed;
+	z-index: 9998;
+	max-width: calc(100vw - 32px);
+}
+
+/* A button floating over the page needs a surface to be readable, so the one
+   look that inherits everything gets the system one here. */
+.apg-guarantee-float .apg-guarantee-notice__trigger--look-inherit {
+	padding: 8px 14px;
+	border-radius: 4px;
+	background: Canvas;
+	color: CanvasText;
+	box-shadow: 0 2px 12px rgb(0 0 0 / 20%);
+	text-decoration: none;
+}
+
+.apg-guarantee-float--top-left {
+	top: 16px;
+	left: 16px;
+}
+
+.apg-guarantee-float--top-right {
+	top: 16px;
+	right: 16px;
+}
+
+.apg-guarantee-float--middle-left {
+	top: 50%;
+	left: 16px;
+	transform: translateY(-50%);
+}
+
+.apg-guarantee-float--middle-right {
+	top: 50%;
+	right: 16px;
+	transform: translateY(-50%);
+}
+
+.apg-guarantee-float--bottom-left {
+	bottom: 16px;
+	left: 16px;
+}
+
+.apg-guarantee-float--bottom-right {
+	bottom: 16px;
+	right: 16px;
+}
+
+/* Printing a page should not carry a floating button onto the paper. */
+@media print {
+	.apg-guarantee-float {
+		display: none;
+	}
+}
+
+/*
+ * In a menu the item is an ordinary link and the theme styles it as one, so
+ * there is nothing to do beyond lining up an icon when there is one. No
+ * colour, no padding, no text-decoration: whatever the theme does to
+ * `.menu-item a` it does here.
+ */
+.apg-guarantee-menu-link--icon_text,
+.apg-guarantee-menu-link--icon {
+	display: inline-flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.apg-guarantee-menu-link {
+	background: var(--apg-guarantee-bg, transparent);
+	color: var(--apg-guarantee-fg, inherit);
+	font-size: var(--apg-guarantee-size, inherit);
+}
+
+.apg-guarantee-menu-link:hover,
+.apg-guarantee-menu-link:focus-visible {
+	background: var(--apg-guarantee-bg-hover, var(--apg-guarantee-bg, transparent));
+	color: var(--apg-guarantee-fg-hover, var(--apg-guarantee-fg, inherit));
+}
+
+/* Only when the menu has no page to point at does it fall back to the button. */
+.apg-guarantee-menu-item .apg-guarantee-notice__trigger {
+	display: inline-flex;
+	gap: 8px;
+	align-items: center;
+	padding: 0;
+}
+
+.apg-guarantee-menu-item .apg-guarantee-notice__trigger--look-inherit {
+	text-decoration: inherit;
+}
+
+/* ---------------------------------------------------------------- the modal */
+
+.apg-guarantee-notice__modal {
+	width: min(92vw, 640px);
+	max-height: 90vh;
+	margin: auto;
+	padding: 0;
+	overflow: auto;
+	border: 0;
+	border-radius: 6px;
+	background: Canvas;
+	color: CanvasText;
+	box-shadow: 0 10px 40px rgb(0 0 0 / 25%);
+}
+
+.apg-guarantee-notice__modal::backdrop {
+	background: rgb(0 0 0 / 50%);
+}
+
+.apg-guarantee-notice__head {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border-bottom: 1px solid currentColor;
+}
+
+.apg-guarantee-notice__title {
+	margin: 0;
+	font-size: 1.1em;
+	line-height: 1.3;
+}
+
+.apg-guarantee-notice__close {
+	flex: none;
+	min-width: 32px;
+	min-height: 32px;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font-size: 24px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.apg-guarantee-notice__body {
+	padding: 16px;
+}
+
+.apg-guarantee-notice__image {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.apg-guarantee-notice__link,
+.apg-guarantee-notice__national {
+	margin: 0.75em 0 0;
+}
+
+/*
+ * Without the popover API the panel is not hidden by the browser, so it would
+ * sit open in the page. That is still compliant — the notice is visible — but
+ * it should not pretend to be a modal, so the overlay styling is dropped and
+ * the trigger, which can no longer do anything, is taken out of the flow.
+ */
+@supports not selector(:popover-open) {
+	.apg-guarantee-notice__trigger,
+	.apg-guarantee-notice__close,
+	.apg-guarantee-float {
+		display: none;
+	}
+
+	.apg-guarantee-notice__modal {
+		width: auto;
+		max-height: none;
+		box-shadow: none;
+		background: none;
+		color: inherit;
+	}
+}
+
+/* ---------------------------------------------------------------- shortcodes */
+
+.apg-guarantee-inline {
+	margin: 1.5em 0;
+}
+
+.apg-guarantee-inline .apg-guarantee-notice__image {
+	max-width: 480px;
+}
+
+.apg-guarantee-terms {
+	margin: 1.5em 0;
+}
+
+.apg-guarantee-footer {
+	margin: 1.5em 0;
+}

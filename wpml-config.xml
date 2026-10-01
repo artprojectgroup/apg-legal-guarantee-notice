@@ -1,0 +1,9 @@
+<wpml-config>
+	<admin-texts>
+		<key name="apg_guarantee_settings">
+			<key name="trigger_text" />
+			<key name="national_note_text" />
+			<key name="terms_text" />
+		</key>
+	</admin-texts>
+</wpml-config>
