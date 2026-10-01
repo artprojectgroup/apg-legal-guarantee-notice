@@ -99,6 +99,7 @@ No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covere
 
 
 == Thanks ==
+
 Thanks to everyone who uses the plugin, helps improve it, makes a donation or encourages us with their comments.
 
 If you find this plugin useful, you can support its development with a [small donation](https://artprojectgroup.es/tienda/donacion).

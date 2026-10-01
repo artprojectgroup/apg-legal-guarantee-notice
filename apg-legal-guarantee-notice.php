@@ -2,7 +2,7 @@
 /*
 Plugin Name: APG Legal Guarantee Notice
 Version: 0.2.0
-Plugin URI: https://artprojectgroup.es/plugins-para-woocommerce/apg-aviso-de-garantia-legal-para-woocommerce
+Plugin URI: https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal
 Description: Shows the official EU harmonised notice on the legal guarantee of conformity, as Article 22a of Directive 2011/83/EU requires since 27 September 2026.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
