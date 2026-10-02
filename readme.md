@@ -76,7 +76,7 @@ No. Al activar el plugin queda un botón flotante en todas las páginas de tu ti
 
 ### ¿Puedo editar el aviso, traducirlo por mi cuenta o recortarlo?
 
-No, y el plugin no te va a dejar. El Reglamento de Ejecución (UE) 2025/1960 fija su diseño y su contenido, y las guías dicen que no se puede distorsionar ni recortar. El plugin incluye los ficheros de la propia Comisión y los sirve byte a byte. Viajan comprimidos con gzip solo para que el plugin ocupe poco; gzip no pierde nada, así que lo que sale de tu servidor es lo que publicó la Comisión.
+No, y el plugin no te va a dejar. El Reglamento de Ejecución (UE) 2025/1960 fija su diseño y su contenido, y las guías dicen que no se puede distorsionar ni recortar. El plugin incluye los ficheros de la propia Comisión y los sirve byte a byte, tal y como salen de su paquete oficial.
 
 ### Mi país concede una garantía más larga que los dos años del aviso.
 
@@ -121,9 +121,9 @@ Si te resulta útil este plugin, puedes apoyar su desarrollo con una [pequeña d
 
 ## Los ficheros del aviso
 
-Los 24 SVG y los 24 PDF de `assets/notices/` son el aviso armonizado oficial sobre la garantía legal de conformidad, tal y como lo publica la Comisión Europea y como lo fija el Reglamento de Ejecución (UE) 2025/1960. No son obra del plugin ni están cubiertos por su licencia GPL: son documentos de la Comisión Europea, reutilizados al amparo de la Decisión 2011/833/UE, que autoriza la reutilización de los documentos de la Comisión de forma gratuita siempre que se cite la fuente. La fuente se cita aquí y junto al propio aviso, que enlaza al portal Tu Europa de la Comisión.
+Los ficheros de imagen y los PDF de `assets/notices/` son el aviso armonizado oficial sobre la garantía legal de conformidad, tal y como lo publica la Comisión Europea y como lo fija el Reglamento de Ejecución (UE) 2025/1960. No son obra del plugin ni están cubiertos por su licencia GPL: son documentos de la Comisión Europea, reutilizados al amparo de la Decisión 2011/833/UE, que autoriza la reutilización de los documentos de la Comisión de forma gratuita siempre que se cite la fuente. La fuente se cita aquí y junto al propio aviso, que enlaza al portal Tu Europa de la Comisión.
 
-El plugin no los edita nunca. Los SVG viajan comprimidos con gzip sólo para que la descarga sea pequeña, y gzip no pierde nada, así que los bytes que salen de tu servidor son los que publicó la Comisión. Los PDF van tal cual llegaron, porque un PDF ya trae su propia compresión.
+El plugin no los edita nunca, no los redibuja y no los redimensiona: los empaqueta tal y como llegaron y sirve los bytes que le dieron. Veintitrés idiomas van en el PNG de la Comisión y el inglés en su SVG, porque su paquete raster no trae el inglés y el vectorial sí. El PDF de cada idioma es el que se adjunta al correo de pedido.
 
 ## Servicios externos
 

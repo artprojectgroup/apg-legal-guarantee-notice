@@ -108,9 +108,33 @@ function apg_guarantee_notice_path( $language ) {
 		return '';
 	}
 
-	$path = plugin_dir_path( apg_guarantee_DIRECCION ) . 'assets/notices/notice-' . $language . '.svgz';
+	$base = plugin_dir_path( apg_guarantee_DIRECCION ) . 'assets/notices/notice-' . $language;
 
-	return file_exists( $path ) ? $path : '';
+	/*
+	 * PNG for twenty-three languages and SVG for English, and the reason is on
+	 * the Commission's side: its raster pack has no English file, while its
+	 * vector pack does. Both are the Commission's own artwork, so whichever is
+	 * there is served as it came.
+	 */
+	foreach ( array( '.png', '.svg' ) as $extension ) {
+		if ( file_exists( $base . $extension ) ) {
+			return $base . $extension;
+		}
+	}
+
+	return '';
+}
+
+/**
+ * The media type of a notice file, taken from its extension.
+ *
+ * @param string $path Path returned by {@see apg_guarantee_notice_path()}.
+ * @return string
+ */
+function apg_guarantee_notice_mime( $path ) {
+	return 'svg' === strtolower( (string) pathinfo( $path, PATHINFO_EXTENSION ) )
+		? 'image/svg+xml'
+		: 'image/png';
 }
 
 /**

@@ -59,7 +59,7 @@ Since **27 September 2026**, Article 22a of Directive 2011/83/EU requires every 
 No. Activating the plugin puts a floating button on every page of your shop, which is the "general reminder on the website of the seller" the Commission's practical guidelines describe, at shop level. The checkout and the order email are on by default too because the guidelines illustrate both. If you switch every placement off, the plugin tells you in the dashboard.
 
 = Can I edit the notice, translate it myself or crop it? =
-No, and the plugin will not let you. Implementing Regulation (EU) 2025/1960 fixes its design and content, and the guidelines say it must not be distorted or cropped. The plugin bundles the Commission's own files and serves them byte for byte. They travel gzipped only to keep the plugin small; gzip is lossless, so what leaves your server is what the Commission published.
+No, and the plugin will not let you. Implementing Regulation (EU) 2025/1960 fixes its design and content, and the guidelines say it must not be distorted or cropped. The plugin bundles the Commission's own files and serves them byte for byte, exactly as they come out of its asset pack.
 
 = My country grants a longer guarantee than the two years in the notice. =
 That is why the national note exists. The notice states the European minimum and cannot say anything else, so the plugin prints your national wording next to it, never inside it. For a site running in Spanish it starts enabled, stating the three years of Article 120.1 TRLGDCU, and you can replace the wording and link it to your terms.
@@ -106,9 +106,9 @@ If you find this plugin useful, you can support its development with a [small do
 
 == The bundled notice files ==
 
-The 24 SVG and 24 PDF files under `assets/notices/` are the official harmonised notice on the legal guarantee of conformity, as published by the European Commission and as Commission Implementing Regulation (EU) 2025/1960 fixes it. They are not the plugin's own work and they are not covered by its GPL licence: they are European Commission documents, reused under Commission Decision 2011/833/EU, which authorises the reuse of Commission documents free of charge provided the source is acknowledged. The source is acknowledged here and beside the notice itself, which links to the Commission's Your Europe portal.
+The image and PDF files under `assets/notices/` are the official harmonised notice on the legal guarantee of conformity, as published by the European Commission and as Commission Implementing Regulation (EU) 2025/1960 fixes it. They are not the plugin's own work and they are not covered by its GPL licence: they are European Commission documents, reused under Commission Decision 2011/833/EU, which authorises the reuse of Commission documents free of charge provided the source is acknowledged. The source is acknowledged here and beside the notice itself, which links to the Commission's Your Europe portal.
 
-The plugin never edits them. The SVG files are stored gzipped only to keep the download small, and gzip is lossless, so the bytes that leave your server are the bytes the Commission published. The PDFs are stored as they came, because a PDF already carries its own compression.
+The plugin never edits them, never redraws them and never resizes them: it ships them as they came and serves the bytes it was given. Twenty-three languages are the Commission's PNG, and English is its SVG, because its raster pack has no English file while its vector pack does. The PDF of every language is the one attached to the order email.
 
 == External services ==
 
