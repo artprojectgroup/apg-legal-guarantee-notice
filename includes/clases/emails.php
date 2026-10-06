@@ -37,34 +37,49 @@ function apg_guarantee_email_notice( $order, $sent_to_admin = false, $plain_text
 		return;
 	}
 
-	$url       = apg_guarantee_notice_url( $language );
-	$your_eu   = apg_guarantee_your_europe_url( $language );
-	$intro     = apg_guarantee_trigger_text();
+	// Some third-party emails hook the order table with something that is not
+	// an order; the filters promise an order or null.
+	$order      = $order instanceof WC_Order ? $order : null;
+	$plain_text = (bool) $plain_text;
+
+	if ( ! apg_guarantee_show_notice( 'email', $order ) ) {
+		apg_guarantee_notice_hidden( 'email', $order, $plain_text );
+
+		return;
+	}
+
+	$url     = apg_guarantee_notice_url( $language );
+	$your_eu = apg_guarantee_your_europe_url( $language );
+	$intro   = apg_guarantee_trigger_text( 'email' );
+	$note    = apg_guarantee_national_note_text( $settings, 'email', $order );
+
+	/** This action is documented in includes/clases/checkout.php */
+	do_action( 'apg_guarantee_before_notice', 'email', $order, $plain_text );
 
 	if ( $plain_text ) {
 		echo "\n" . esc_html( $intro ) . "\n";
 		echo esc_url_raw( $your_eu ) . "\n";
 
-		if ( '1' === (string) $settings['national_note'] ) {
-			$text = trim( (string) $settings['national_note_text'] );
-			echo esc_html( '' !== $text ? $text : apg_guarantee_default_national_note() ) . "\n";
+		if ( '' !== $note ) {
+			echo esc_html( $note ) . "\n";
 		}
-
-		return;
+	} else {
+		?>
+		<div style="margin:24px 0;">
+			<p style="margin:0 0 8px;"><strong><?php echo esc_html( $intro ); ?></strong></p>
+			<img src="<?php echo esc_url( $url ); ?>" alt="<?php esc_attr_e( 'Official EU notice on the legal guarantee of conformity', 'apg-legal-guarantee-notice' ); ?>" style="max-width:100%;height:auto;">
+			<p style="margin:8px 0 0;">
+				<a href="<?php echo esc_url( $your_eu ); ?>"><?php echo esc_html( apg_guarantee_your_europe_link_text( 'email', $order ) ); ?></a>
+			</p>
+			<?php if ( '' !== $note ) : ?>
+				<p style="margin:8px 0 0;"><?php echo esc_html( $note ); ?></p>
+			<?php endif; ?>
+		</div>
+		<?php
 	}
-	?>
-	<div style="margin:24px 0;">
-		<p style="margin:0 0 8px;"><strong><?php echo esc_html( $intro ); ?></strong></p>
-		<img src="<?php echo esc_url( $url ); ?>" alt="<?php esc_attr_e( 'Official EU notice on the legal guarantee of conformity', 'apg-legal-guarantee-notice' ); ?>" style="max-width:100%;height:auto;">
-		<p style="margin:8px 0 0;">
-			<a href="<?php echo esc_url( $your_eu ); ?>"><?php esc_html_e( 'More about your guarantee rights in your country', 'apg-legal-guarantee-notice' ); ?></a>
-		</p>
-		<?php if ( '1' === (string) $settings['national_note'] ) : ?>
-			<?php $text = trim( (string) $settings['national_note_text'] ); ?>
-			<p style="margin:8px 0 0;"><?php echo esc_html( '' !== $text ? $text : apg_guarantee_default_national_note() ); ?></p>
-		<?php endif; ?>
-	</div>
-	<?php
+
+	/** This action is documented in includes/clases/checkout.php */
+	do_action( 'apg_guarantee_after_notice', 'email', $order, $plain_text );
 }
 add_action( 'woocommerce_email_after_order_table', 'apg_guarantee_email_notice', 20, 3 );
 
@@ -96,9 +111,23 @@ function apg_guarantee_email_attachment( $adjuntos, $id, $objeto = null, $correo
 		return $adjuntos;
 	}
 
-	$pdf = apg_guarantee_notice_pdf_path( apg_guarantee_current_language() );
+	$order = $objeto instanceof WC_Order ? $objeto : null;
 
-	if ( '' === $pdf || in_array( $pdf, $adjuntos, true ) ) {
+	if ( ! apg_guarantee_show_notice( 'email_attachment', $order ) ) {
+		return $adjuntos;
+	}
+
+	/**
+	 * Filters the file attached to the customer email. An empty string attaches
+	 * nothing.
+	 *
+	 * @param string        $pdf   Absolute path of the official PDF.
+	 * @param string        $id    WooCommerce email id.
+	 * @param WC_Order|null $order Order the email is about.
+	 */
+	$pdf = (string) apply_filters( 'apg_guarantee_email_attachment_path', apg_guarantee_notice_pdf_path( apg_guarantee_current_language() ), $id, $order );
+
+	if ( '' === $pdf || ! is_readable( $pdf ) || in_array( $pdf, $adjuntos, true ) ) {
 		return $adjuntos;
 	}
 

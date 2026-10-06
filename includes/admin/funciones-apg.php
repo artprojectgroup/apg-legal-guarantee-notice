@@ -205,9 +205,11 @@ function apg_guarantee_default_terms_text() {
 /**
  * The wording of the line that opens the notice.
  *
+ * @param string $context Optional. Placement being rendered: `checkout`, `email`,
+ *                        `float`, `footer`, `menu`, `shortcode` or `panel`.
  * @return string
  */
-function apg_guarantee_trigger_text() {
+function apg_guarantee_trigger_text( $context = '' ) {
 	$settings = apg_guarantee_get_settings();
 	$text     = trim( (string) ( isset( $settings['trigger_text'] ) ? $settings['trigger_text'] : '' ) );
 
@@ -220,21 +222,23 @@ function apg_guarantee_trigger_text() {
 	/**
 	 * Filters the line that opens the notice.
 	 *
-	 * @param string $text Trigger wording.
+	 * @param string $text    Trigger wording.
+	 * @param string $context Placement being rendered; empty when unknown.
 	 */
-	return (string) apply_filters( 'apg_guarantee_trigger_text', $text );
+	return (string) apply_filters( 'apg_guarantee_trigger_text', $text, (string) $context );
 }
 
 /**
  * Returns the arguments one placement renders its button with.
  *
  * @param string $placement One of {@see apg_guarantee_placements()}.
- * @return array{style:string,appearance:array}
+ * @return array{context:string,style:string,appearance:array}
  */
 function apg_guarantee_placement_args( $placement ) {
 	$settings = apg_guarantee_get_settings();
 
 	return array(
+		'context'    => (string) $placement,
 		'style'      => isset( $settings[ $placement . '_style' ] ) ? (string) $settings[ $placement . '_style' ] : 'text',
 		'appearance' => array(
 			'look'             => isset( $settings[ $placement . '_look' ] ) ? (string) $settings[ $placement . '_look' ] : 'inherit',

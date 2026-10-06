@@ -5,9 +5,9 @@ Tags: legal guarantee, consumer rights, woocommerce, eu, conformity
 Requires at least: 6.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 WC requires at least: 7.0
-WC tested up to: 11.1.2
+WC tested up to: 11.2.0
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -31,6 +31,7 @@ Since **27 September 2026**, Article 22a of Directive 2011/83/EU requires every 
 * A national note beside the notice for the three-year legal guarantee of Article 120.1 TRLGDCU in Spain, which the uneditable European notice cannot state.
 * Your own guarantee terms, with a starting text you edit, and a button that creates a page holding both and selects it as your terms page.
 * Shortcodes `[apg_guarantee_notice]`, `[apg_guarantee_terms]` and `[apg_guarantee_button]`.
+* Hooks to hide the notice per placement and per customer, for shops that also sell to trade customers, to change its wording and the email attachment, and to print your own content before, after or instead of it.
 * Warns you in the dashboard when no placement is enabled and the notice would not be reaching anyone.
 * WPML and Polylang ready for the wording you write, through `wpml-config.xml` and runtime string registration.
 * The notice is cached by the browser for a year, so it costs one request per visitor.
@@ -73,6 +74,24 @@ The 24 official EU languages the Commission publishes: Bulgarian, Croatian, Czec
 = What about the GARAN label? =
 It is a different thing and it is voluntary. The EU GARAN label marks a commercial guarantee of durability that a **producer** offers free of charge, for the whole good, for more than two years. It is the producer's decision, not the seller's, so most shops have nothing to do about it. Support for it may come to this plugin later.
 
+= I also sell to trade customers. Can I hide the notice from them? =
+Yes. The notice is owed to consumers only, but WordPress and WooCommerce cannot tell a consumer from a trade customer, and every wholesale or B2B plugin marks them its own way. So the plugin asks you through the `apg_guarantee_show_notice` filter, once per placement. For example, to hide it from the `wholesale_customer` role:
+
+`add_filter( 'apg_guarantee_show_notice', function ( $show, $context, $order ) {
+	$user_id = $order ? $order->get_customer_id() : get_current_user_id();
+	return $show && ! user_can( $user_id, 'wholesale_customer' );
+}, 10, 3 );`
+
+The contexts are `checkout`, `email`, `email_attachment`, `float`, `footer`, `menu` and `shortcode`, and `$order` is only set in the two email contexts. In the emails the decision is exact because the order says who bought; elsewhere it relies on the customer being logged in, since an anonymous visitor cannot be told apart and a full-page cache serves them all the same page.
+
+To print your own trade terms where the notice was hidden, use the `apg_guarantee_notice_hidden` action. The rest of the hooks:
+
+* `apg_guarantee_before_notice` and `apg_guarantee_after_notice` (actions): content around the notice at the checkout, in the email and in `[apg_guarantee_notice]`. They receive `$context`, `$order` and `$plain_text`, as `apg_guarantee_notice_hidden` does.
+* `apg_guarantee_trigger_text`: the line that opens the notice, with `$context` (`panel` for the modal title).
+* `apg_guarantee_your_europe_link_text`: the wording of the link to Your Europe.
+* `apg_guarantee_national_note_text`: the national note; an empty string leaves it out.
+* `apg_guarantee_email_attachment_path`: the file attached to the email; an empty string attaches nothing.
+
 = Is this the same as the withdrawal button? =
 No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covered by our [APG Withdrawal for WooCommerce](https://wordpress.org/plugins/apg-withdrawal-for-woocommerce/). This plugin covers Article 22a, which is a separate obligation. You can run both.
 
@@ -82,6 +101,10 @@ No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covere
 2. The settings screen.
 
 == Changelog ==
+= 0.3.0 =
+* New hooks to hide the notice per placement and per customer (for instance from trade customers), change its texts and the email attachment, and add your own content before, after or instead of it.
+* The national note in the email is now translated with WPML and Polylang, as on the website.
+
 = 0.2.0 =
 * WooCommerce is no longer required: without it the settings move under Settings and the checkout and order email placements are hidden.
 * The customer order email now carries the official PDF of the notice as an attachment, in the customer's language.
@@ -93,6 +116,9 @@ No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covere
 * First release.
 
 == Upgrade Notice ==
+= 0.3.0 =
+* New hooks to hide the notice per placement and per customer, change its texts and add your own content around it.
+
 = 0.2.0 =
 * WooCommerce is no longer required: without it the settings move under Settings and the checkout and order email placements are hidden.
 * The customer order email now carries the official PDF of the notice as an attachment, in the customer's language.

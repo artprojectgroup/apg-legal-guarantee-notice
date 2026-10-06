@@ -12,11 +12,11 @@ Tested up to: 7.2
 
 Requires PHP: 7.4
 
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 
 WC requires at least: 7.0
 
-WC tested up to: 11.1.2
+WC tested up to: 11.2.0
 
 License: GNU General Public License v3 or later
 
@@ -38,14 +38,16 @@ Desde el **27 de septiembre de 2026**, el artículo 22 bis de la Directiva 2011/
 - Se abre en un modal al primer clic, el patrón que ilustran las guías prácticas de la Comisión, con la API popover nativa y sin nada de JavaScript.
 - Cuatro colocaciones, cada una con sus propios ajustes: un botón flotante en seis posiciones posibles, el último elemento de cualquier menú, el pie y Finalizar compra encima del botón de realizar el pedido.
 - Cada colocación elige su estilo —texto, icono y texto, o solo icono— y sus colores, colores al pasar el ratón y tamaño de letra, todos partiendo de "heredar del tema".
-- En los correos de pedido al cliente, que es lo que piden también las guías.
+- En los correos de pedido al cliente, que es lo que piden también las guías, con el PDF oficial adjunto en el idioma del cliente.
 - El enlace clicable a Your Europe que debe acompañar al aviso, en el idioma que toca.
 - Una nota nacional junto al aviso para los tres años de garantía legal del artículo 120.1 del TRLGDCU en España, que el aviso europeo no puede indicar por no ser editable.
 - Tus propias condiciones de garantía, con un texto de partida que editas, y un botón que crea una página con ambas cosas y la selecciona como tu página de condiciones.
 - Shortcodes `[apg_guarantee_notice]`, `[apg_guarantee_terms]` y `[apg_guarantee_button]`.
+- Hooks para ocultar el aviso por ubicación y por cliente, en tiendas que también venden a profesionales, cambiar sus textos y el adjunto del correo, y pintar tu propio contenido antes, después o en lugar del aviso.
 - Te avisa en el escritorio cuando no hay ninguna colocación activa y el aviso no estaría llegando a nadie.
 - Compatible con WPML y Polylang para los textos que escribes, mediante `wpml-config.xml` y registro de cadenas en tiempo de ejecución.
 - El navegador cachea el aviso un año, así que cuesta una petición por visitante.
+- Funciona con WooCommerce y sin él: con él el aviso llega a Finalizar compra y a los correos de pedido, y sin él todo lo demás sigue funcionando.
 - El plugin no fija ningún color, borde ni tipografía salvo que se lo pidas, así que hereda la estética de tu tema, también en temas oscuros.
 
 ### Traducciones
@@ -94,11 +96,37 @@ Los 24 oficiales de la UE que publica la Comisión: alemán, búlgaro, checo, cr
 
 Es otra cosa y es voluntaria. La etiqueta GARAN de la UE señala una garantía comercial de durabilidad que ofrece gratis el **fabricante**, para el producto entero y por más de dos años. Es decisión del fabricante, no del vendedor, así que la mayoría de tiendas no tienen nada que hacer con ella. Puede que llegue a este plugin más adelante.
 
+### También vendo a profesionales. ¿Puedo ocultarles el aviso?
+
+Sí. El aviso solo se debe a los consumidores, pero WordPress y WooCommerce no distinguen a un consumidor de un profesional, y cada plugin mayorista o B2B los marca a su manera. Por eso el plugin te lo pregunta con el filtro `apg_guarantee_show_notice`, una vez por ubicación. Por ejemplo, para ocultarlo al rol `wholesale_customer`:
+
+```php
+add_filter( 'apg_guarantee_show_notice', function ( $show, $context, $order ) {
+	$user_id = $order ? $order->get_customer_id() : get_current_user_id();
+	return $show && ! user_can( $user_id, 'wholesale_customer' );
+}, 10, 3 );
+```
+
+Los contextos son `checkout`, `email`, `email_attachment`, `float`, `footer`, `menu` y `shortcode`, y `$order` solo llega en los dos del correo. En los correos la decisión es exacta, porque el pedido dice quién compró; en el resto depende de que el cliente esté identificado, ya que a un visitante anónimo no se le puede distinguir y una caché de página completa les sirve a todos la misma página.
+
+Para pintar tus condiciones para profesionales donde se ha ocultado el aviso, usa la acción `apg_guarantee_notice_hidden`. El resto de hooks:
+
+- `apg_guarantee_before_notice` y `apg_guarantee_after_notice` (acciones): contenido alrededor del aviso en Finalizar compra, en el correo y en `[apg_guarantee_notice]`. Reciben `$context`, `$order` y `$plain_text`, igual que `apg_guarantee_notice_hidden`.
+- `apg_guarantee_trigger_text`: la frase que abre el aviso, con `$context` (`panel` para el título del modal).
+- `apg_guarantee_your_europe_link_text`: el texto del enlace a Your Europe.
+- `apg_guarantee_national_note_text`: la nota nacional; una cadena vacía la quita.
+- `apg_guarantee_email_attachment_path`: el fichero adjunto al correo; una cadena vacía no adjunta nada.
+
 ### ¿Esto es lo mismo que el botón de desistimiento?
 
 No. Aquel es el artículo 11 bis, que añadió la Directiva (UE) 2023/2673, y lo cubre nuestro [APG Desistimiento para WooCommerce](https://wordpress.org/plugins/apg-withdrawal-for-woocommerce/). Este plugin cubre el artículo 22 bis, que es una obligación distinta. Puedes usar los dos a la vez.
 
 ## Changelog
+
+### 0.3.0
+
+* Nuevos hooks para ocultar el aviso por ubicación y por cliente (por ejemplo, a profesionales), cambiar sus textos y el adjunto del correo, y añadir tu propio contenido antes, después o en lugar del aviso.
+* La nota nacional del correo ahora se traduce con WPML y Polylang, igual que en la web.
 
 ### 0.2.0
 
@@ -131,6 +159,6 @@ Los ficheros del aviso viajan dentro del plugin y no se descarga nada para servi
 
 El plugin hace una única petición a un servicio externo, y sólo ahí:
 
-- **API de plugins de wordpress.org** (`https://api.wordpress.org/plugins/info/1.2/`). Se le pide la puntuación del propio plugin para mostrarla en la pantalla de ajustes. Ocurre sólo mientras un administrador está viendo esa pantalla, como mucho una vez al día, y la respuesta se cachea 24 horas. La petición lleva el slug del plugin y nada más: ningún dato personal, ningún dato del sitio, ningún dato del visitante. Nunca se hace en el frontend. Se rige por la [política de privacidad de WordPress.org](https://wordpress.org/about/privacy/). Si la petición falla, la pantalla dice simplemente que la puntuación es desconocida.
+- **API de plugins de wordpress.org** (`https://api.wordpress.org/plugins/info/1.2/`). Se le pide la puntuación del propio plugin para mostrarla en la pantalla de ajustes. Ocurre sólo mientras un administrador está viendo esa pantalla, como mucho una vez al día, y la respuesta se cachea 24 horas. La petición lleva el slug del plugin y nada más: ningún dato personal, ningún dato del sitio, ningún dato del visitante. Nunca se hace en el frontend. Se rige por la [política de privacidad de WordPress.org](https://wordpress.org/about/privacy/) y por sus [términos](https://wordpress.org/about/privacy/). Si la petición falla, la pantalla dice simplemente que la puntuación es desconocida.
 
 El aviso contiene un código QR, y el plugin imprime el enlace clicable equivalente; ambos apuntan al portal Your Europe de la Comisión Europea (`https://europa.eu/youreurope/...`). Son enlaces que el visitante puede decidir seguir; el plugin no solicita nada a ese sitio.

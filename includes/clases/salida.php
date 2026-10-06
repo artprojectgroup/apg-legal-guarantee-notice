@@ -108,6 +108,112 @@ function apg_guarantee_available() {
 }
 
 /**
+ * Whether one placement shows the notice on this request.
+ *
+ * The notice is owed to consumers only. A shop that also sells to trade
+ * customers has to tell them apart, and WordPress and WooCommerce have no
+ * native way of doing it: every wholesale or B2B plugin marks them its own way
+ * (a role, a user meta, a VAT number on the order). So the plugin does not
+ * guess; it asks, once per placement, and whoever knows the shop answers.
+ *
+ * Contexts: `checkout`, `email`, `email_attachment`, `float`, `footer`, `menu`
+ * and `shortcode`. Only the email contexts have an order; everywhere else the
+ * visitor is whoever `get_current_user_id()` says, and a full-page cache will
+ * serve every anonymous visitor the same page.
+ *
+ * @param string        $context Placement being rendered.
+ * @param WC_Order|null $order   Order the placement is about, when there is one.
+ * @return bool
+ */
+function apg_guarantee_show_notice( $context, $order = null ) {
+	/**
+	 * Filters whether one placement shows the notice.
+	 *
+	 * @param bool          $show    Whether to show it. Default true.
+	 * @param string        $context Placement being rendered.
+	 * @param WC_Order|null $order   Order, in the email contexts; null elsewhere.
+	 */
+	return (bool) apply_filters( 'apg_guarantee_show_notice', true, $context, $order );
+}
+
+/**
+ * Runs the hook that lets a shop print its own content where the notice was
+ * hidden, such as its trade guarantee terms for a wholesale customer.
+ *
+ * @param string        $context    Placement being rendered.
+ * @param WC_Order|null $order      Order, in the email context; null elsewhere.
+ * @param bool          $plain_text Whether the output is a plain-text email.
+ * @return void
+ */
+function apg_guarantee_notice_hidden( $context, $order = null, $plain_text = false ) {
+	/**
+	 * Fires where the notice would have been printed and the
+	 * `apg_guarantee_show_notice` filter hid it. Runs at the checkout, in the
+	 * customer email and in the `[apg_guarantee_notice]` shortcode.
+	 *
+	 * @param string        $context    Placement being rendered.
+	 * @param WC_Order|null $order      Order, in the email context; null elsewhere.
+	 * @param bool          $plain_text Whether the output is a plain-text email.
+	 */
+	do_action( 'apg_guarantee_notice_hidden', $context, $order, $plain_text );
+}
+
+/**
+ * Wording of the link to Your Europe that goes with the notice.
+ *
+ * @param string        $context Placement being rendered.
+ * @param WC_Order|null $order   Order, in the email context; null elsewhere.
+ * @return string
+ */
+function apg_guarantee_your_europe_link_text( $context, $order = null ) {
+	/**
+	 * Filters the wording of the link to Your Europe.
+	 *
+	 * @param string        $text    Link wording.
+	 * @param string        $context Placement being rendered.
+	 * @param WC_Order|null $order   Order, in the email context; null elsewhere.
+	 */
+	return (string) apply_filters(
+		'apg_guarantee_your_europe_link_text',
+		__( 'More about your guarantee rights in your country', 'apg-legal-guarantee-notice' ),
+		$context,
+		$order
+	);
+}
+
+/**
+ * Wording of the national note, or an empty string when it is off.
+ *
+ * @param array         $settings Plugin settings.
+ * @param string        $context  Placement being rendered.
+ * @param WC_Order|null $order    Order, in the email context; null elsewhere.
+ * @return string
+ */
+function apg_guarantee_national_note_text( $settings, $context, $order = null ) {
+	if ( '1' !== ( isset( $settings['national_note'] ) ? (string) $settings['national_note'] : '0' ) ) {
+		return '';
+	}
+
+	$text = trim( (string) ( isset( $settings['national_note_text'] ) ? $settings['national_note_text'] : '' ) );
+
+	if ( '' === $text ) {
+		$text = apg_guarantee_default_national_note();
+	}
+
+	$text = apg_guarantee_translate_string( $text, 'National note' );
+
+	/**
+	 * Filters the national note printed beside the notice. An empty string
+	 * leaves it out.
+	 *
+	 * @param string        $text    Note wording.
+	 * @param string        $context Placement being rendered.
+	 * @param WC_Order|null $order   Order, in the email context; null elsewhere.
+	 */
+	return trim( (string) apply_filters( 'apg_guarantee_national_note_text', $text, $context, $order ) );
+}
+
+/**
  * Prints the icon that can accompany or replace the wording.
  *
  * Deliberately a neutral shield of our own drawing: the shield with the circle
@@ -129,7 +235,8 @@ function apg_guarantee_print_icon() {
 /**
  * Prints one button that opens the notice.
  *
- * @param array $args Optional. `label`, `class` and `style` (text|icon_text|icon).
+ * @param array $args Optional. `label`, `class`, `style` (text|icon_text|icon)
+ *                    and `context`, the placement handed to the wording filter.
  * @return void
  */
 function apg_guarantee_print_trigger( $args = array() ) {
@@ -143,6 +250,7 @@ function apg_guarantee_print_trigger( $args = array() ) {
 			'label'      => '',
 			'class'      => '',
 			'style'      => 'text',
+			'context'    => '',
 			// An empty array means "no look of its own": the button inherits
 			// everything, which is what the settings preview wants and what a
 			// placement with nothing configured gets anyway.
@@ -150,7 +258,7 @@ function apg_guarantee_print_trigger( $args = array() ) {
 		)
 	);
 
-	$label = '' !== trim( (string) $args['label'] ) ? (string) $args['label'] : apg_guarantee_trigger_text();
+	$label = '' !== trim( (string) $args['label'] ) ? (string) $args['label'] : apg_guarantee_trigger_text( (string) $args['context'] );
 	$style = in_array( $args['style'], array( 'text', 'icon_text', 'icon' ), true ) ? $args['style'] : 'text';
 
 	wp_enqueue_style( 'apg-legal-guarantee-notice' );
@@ -327,7 +435,7 @@ function apg_guarantee_print_panel() {
 	?>
 	<div id="<?php echo esc_attr( APG_GUARANTEE_PANEL_ID ); ?>" popover="auto" class="apg-guarantee-notice__modal" role="dialog" aria-labelledby="<?php echo esc_attr( $title ); ?>">
 		<div class="apg-guarantee-notice__head">
-			<h2 id="<?php echo esc_attr( $title ); ?>" class="apg-guarantee-notice__title"><?php echo esc_html( apg_guarantee_trigger_text() ); ?></h2>
+			<h2 id="<?php echo esc_attr( $title ); ?>" class="apg-guarantee-notice__title"><?php echo esc_html( apg_guarantee_trigger_text( 'panel' ) ); ?></h2>
 			<?php
 			// The popover API only moves focus into the panel when something in
 			// it asks for it, so the close button does. Without this the
@@ -346,11 +454,11 @@ function apg_guarantee_print_panel() {
 			>
 			<p class="apg-guarantee-notice__link">
 				<a href="<?php echo esc_url( apg_guarantee_your_europe_url( $language ) ); ?>" target="_blank" rel="noopener">
-					<?php esc_html_e( 'More about your guarantee rights in your country', 'apg-legal-guarantee-notice' ); ?>
+					<?php echo esc_html( apg_guarantee_your_europe_link_text( 'panel' ) ); ?>
 					<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'apg-legal-guarantee-notice' ); ?></span>
 				</a>
 			</p>
-			<?php apg_guarantee_print_national_note( $settings ); ?>
+			<?php apg_guarantee_print_national_note( $settings, 'panel' ); ?>
 		</div>
 	</div>
 	<?php
@@ -364,21 +472,16 @@ function apg_guarantee_print_panel() {
  * to three years from delivery in Article 120.1 TRLGDCU, so a Spanish shop has
  * to tell the consumer that, next to the notice.
  *
- * @param array $settings Plugin settings.
+ * @param array  $settings Plugin settings.
+ * @param string $context  Placement being rendered.
  * @return void
  */
-function apg_guarantee_print_national_note( $settings ) {
-	if ( '1' !== ( isset( $settings['national_note'] ) ? (string) $settings['national_note'] : '0' ) ) {
-		return;
-	}
-
-	$text = trim( (string) ( isset( $settings['national_note_text'] ) ? $settings['national_note_text'] : '' ) );
+function apg_guarantee_print_national_note( $settings, $context = 'panel' ) {
+	$text = apg_guarantee_national_note_text( $settings, $context );
 
 	if ( '' === $text ) {
-		$text = apg_guarantee_default_national_note();
+		return;
 	}
-
-	$text = apg_guarantee_translate_string( $text, 'National note' );
 
 	$terms = absint( isset( $settings['terms_page'] ) ? $settings['terms_page'] : 0 );
 	$link  = $terms ? get_permalink( $terms ) : '';
@@ -411,13 +514,22 @@ function apg_guarantee_notice_shortcode( $atts ) {
 		return '';
 	}
 
+	ob_start();
+
+	if ( ! apg_guarantee_show_notice( 'shortcode' ) ) {
+		apg_guarantee_notice_hidden( 'shortcode' );
+
+		return (string) ob_get_clean();
+	}
+
 	wp_enqueue_style( 'apg-legal-guarantee-notice' );
 
 	$settings = apg_guarantee_get_settings();
 	$language = apg_guarantee_current_language();
 	$classes  = trim( 'apg-guarantee-inline ' . sanitize_html_class( (string) $atts['class'] ) );
 
-	ob_start();
+	/** This action is documented in includes/clases/checkout.php */
+	do_action( 'apg_guarantee_before_notice', 'shortcode', null, false );
 	?>
 	<div class="<?php echo esc_attr( $classes ); ?>">
 		<img
@@ -429,13 +541,15 @@ function apg_guarantee_notice_shortcode( $atts ) {
 		>
 		<p class="apg-guarantee-notice__link">
 			<a href="<?php echo esc_url( apg_guarantee_your_europe_url( $language ) ); ?>" target="_blank" rel="noopener">
-				<?php esc_html_e( 'More about your guarantee rights in your country', 'apg-legal-guarantee-notice' ); ?>
+				<?php echo esc_html( apg_guarantee_your_europe_link_text( 'shortcode' ) ); ?>
 				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'apg-legal-guarantee-notice' ); ?></span>
 			</a>
 		</p>
-		<?php apg_guarantee_print_national_note( $settings ); ?>
+		<?php apg_guarantee_print_national_note( $settings, 'shortcode' ); ?>
 	</div>
 	<?php
+	/** This action is documented in includes/clases/checkout.php */
+	do_action( 'apg_guarantee_after_notice', 'shortcode', null, false );
 
 	return (string) ob_get_clean();
 }
@@ -495,6 +609,12 @@ function apg_guarantee_button_shortcode( $atts ) {
 		unset( $atts['style'] );
 	}
 
+	if ( ! apg_guarantee_show_notice( 'shortcode' ) ) {
+		return '';
+	}
+
+	$atts['context'] = 'shortcode';
+
 	ob_start();
 	echo '<span class="apg-guarantee-notice">';
 	apg_guarantee_print_trigger( $atts );
@@ -524,7 +644,7 @@ function apg_guarantee_menu_item( $items, $args ) {
 	$settings = apg_guarantee_get_settings();
 	$menu_id  = absint( isset( $settings['menu_id'] ) ? $settings['menu_id'] : 0 );
 
-	if ( ! $menu_id || is_admin() || ! apg_guarantee_available() ) {
+	if ( ! $menu_id || is_admin() || ! apg_guarantee_available() || ! apg_guarantee_show_notice( 'menu' ) ) {
 		return $items;
 	}
 
@@ -558,7 +678,7 @@ function apg_guarantee_print_menu_item() {
 	$page     = absint( isset( $settings['terms_page'] ) ? $settings['terms_page'] : 0 );
 	$url      = $page ? get_permalink( $page ) : '';
 	$args     = apg_guarantee_placement_args( 'menu' );
-	$label    = apg_guarantee_trigger_text();
+	$label    = apg_guarantee_trigger_text( 'menu' );
 
 	// The classes WordPress puts on a page item of its own, so a theme that
 	// styles `.menu-item-object-page` or the current item finds them here too.
@@ -623,7 +743,7 @@ function apg_guarantee_footer() {
 	$settings = apg_guarantee_get_settings();
 	$position = isset( $settings['float_position'] ) ? (string) $settings['float_position'] : '';
 
-	if ( in_array( $position, apg_guarantee_float_positions(), true ) ) {
+	if ( in_array( $position, apg_guarantee_float_positions(), true ) && apg_guarantee_show_notice( 'float' ) ) {
 		// The wrapper only positions. Every colour lives on the button, so the
 		// two can never paint a surface on top of each other.
 		printf( '<div class="apg-guarantee-float apg-guarantee-float--%1$s">', esc_attr( $position ) );
@@ -631,7 +751,7 @@ function apg_guarantee_footer() {
 		echo '</div>';
 	}
 
-	if ( '1' === (string) ( isset( $settings['footer_enabled'] ) ? $settings['footer_enabled'] : '0' ) ) {
+	if ( '1' === (string) ( isset( $settings['footer_enabled'] ) ? $settings['footer_enabled'] : '0' ) && apg_guarantee_show_notice( 'footer' ) ) {
 		echo '<div class="apg-guarantee-footer">';
 		apg_guarantee_print_trigger( apg_guarantee_placement_args( 'footer' ) );
 		echo '</div>';

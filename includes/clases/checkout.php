@@ -43,9 +43,35 @@ function apg_guarantee_checkout_notice() {
 		return;
 	}
 
+	if ( ! apg_guarantee_show_notice( 'checkout' ) ) {
+		apg_guarantee_notice_hidden( 'checkout' );
+
+		return;
+	}
+
+	/**
+	 * Fires right before the notice is printed at the checkout, in the
+	 * customer email and in the `[apg_guarantee_notice]` shortcode.
+	 *
+	 * @param string        $context    `checkout`, `email` or `shortcode`.
+	 * @param WC_Order|null $order      Order, in the email context; null elsewhere.
+	 * @param bool          $plain_text Whether the output is a plain-text email.
+	 */
+	do_action( 'apg_guarantee_before_notice', 'checkout', null, false );
+
 	echo '<div class="apg-guarantee-checkout">';
 	apg_guarantee_print_trigger( apg_guarantee_placement_args( 'checkout' ) );
 	echo '</div>';
+
+	/**
+	 * Fires right after the notice is printed at the checkout, in the
+	 * customer email and in the `[apg_guarantee_notice]` shortcode.
+	 *
+	 * @param string        $context    `checkout`, `email` or `shortcode`.
+	 * @param WC_Order|null $order      Order, in the email context; null elsewhere.
+	 * @param bool          $plain_text Whether the output is a plain-text email.
+	 */
+	do_action( 'apg_guarantee_after_notice', 'checkout', null, false );
 }
 add_action( 'woocommerce_review_order_before_submit', 'apg_guarantee_checkout_notice' );
 

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: APG Legal Guarantee Notice
-Version: 0.2.0
+Version: 0.3.0
 Plugin URI: https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal
 Description: Shows the official EU harmonised notice on the legal guarantee of conformity, as Article 22a of Directive 2011/83/EU requires since 27 September 2026.
 Author URI: https://artprojectgroup.es/
@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 6.0
 Requires PHP: 7.4
 WC requires at least: 7.0
-WC tested up to: 11.1.2
+WC tested up to: 11.2.0
 
 Text Domain: apg-legal-guarantee-notice
 Domain Path: /languages
@@ -23,7 +23,7 @@ Domain Path: /languages
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'apg_guarantee_VERSION', '0.2.0' );
+define( 'apg_guarantee_VERSION', '0.3.0' );
 define( 'apg_guarantee_DIRECCION', __FILE__ );
 
 /**
