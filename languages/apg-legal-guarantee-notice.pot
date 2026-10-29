@@ -448,3 +448,155 @@ msgstr ""
 #: includes/clases/salida.php:309
 msgid "See our terms and conditions"
 msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "More help"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "Full documentation"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "The notice"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "Article 22a of Directive 2011/83/EU has required every shop selling goods to consumers to display the official EU notice on the legal guarantee of conformity since 27 September 2026. Commission Implementing Regulation (EU) 2025/1960 fixes its design and its content."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "There is nothing to write and nothing to design here: the plugin ships the Commission's own files, in the 24 official EU languages, and serves them untouched. The notice cannot be edited, cropped or redrawn, and the plugin will not let you."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "The language follows the visitor"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "not the site. A shop read in German serves the German notice. Catalan, Basque and Galician fall back on the Spanish notice rather than the English one."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "opens the very notice a visitor would see right now, in the language named beside it."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "It opens on the first click"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "in a modal, the pattern the Commission's guidelines illustrate, built with the browser's own popover API and no JavaScript at all."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "Where it is shown"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "The obligation is to display the notice at shop level, so one placement reaching every page is enough. Switch them all off and the plugin warns you on the dashboard, because then the notice is not reaching anybody."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "floats over every page of the shop, in any of six positions. On out of the box, at the bottom right, and on its own it satisfies the obligation."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "added as the last item of the menu you choose. With a page chosen below it is an ordinary link, which is what a theme knows how to style; with no page it opens the modal instead."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "adds it to the footer of every page, wherever your theme prints the footer."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "Every placement carries its own appearance, so the floating button can shout and the menu item can be indistinguishable from the rest of the menu. Out of the box nothing is imposed at all, which is what keeps the notice readable on a dark theme."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "text, icon and text, or icon only. The Commission describes the notice as a sentence, and every example in its guidelines is written text, so text only is the recommended answer. Icon only keeps the wording for screen readers and in the tooltip, but a visitor on a phone never sees it, since there is no hover on a touch screen."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "whatever surrounds it, a link of this theme, a button of this theme, or colours you choose."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "nothing of the plugin's goes on the element, which inherits everything from the theme."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "hands the element the theme's own button classes, so the theme paints it, hover and focus included."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "reads the link colours out of the theme, which a block theme answers through its theme.json and a classic theme not at all. With no answer the element simply inherits."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "opens the text, background and hover colours, and the font size in pixels. Each colour has an Inherit box next to it, and ticked it is the theme that decides; an empty font size leaves the size to the theme as well."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "Both of these are WooCommerce's: without it there is no checkout to print above and no order email to go into, so the two settings are hidden rather than shown doing nothing. What you had configured is kept and comes back the day WooCommerce does."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "shows it above the place-order button of the classic checkout, and under the form when the shop uses the Checkout block, where it is outside the React root and survives. The Commission's guidelines ask for the checkout page, prominently, not a precise spot."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "includes the notice in the emails the customer receives, as an image, since an email client cannot open a modal, and attaches the Commission's official PDF in the customer's language. Your own copies of the emails are left alone."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "Wording and the national note"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "The notice is the Commission's and cannot be touched. These two texts are yours: the line that opens it and the national note printed beside it."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "used by every placement, and the title of the modal. Leave it empty for the default wording."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "the official notice says \"minimum two years\" because that is the European floor and the file may not be edited. Where your own country grants longer, this is how you tell the customer, next to the notice and never inside it."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "the text of that note. Empty, it states the three years Article 120.1 TRLGDCU grants in Spain, and it arrives switched on when the shop sells from Spain. The country is read from your WooCommerce base location, never guessed from the language."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "linked from the national note, and the page the menu item points at. Defaults to the Terms and conditions page of WooCommerce, which is not the same thing as the privacy policy page."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "creates a published page holding the official notice and your guarantee terms, and selects it here. Uninstalling the plugin never deletes it: it is your content."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "The official notice is the European summary. What it does not say is what your shop does: how long the guarantee runs here, how a customer claims it and who they write to."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "your own terms, shown by the [apg_guarantee_terms] shortcode. Leave it empty to use the suggested text, which appears greyed out in the field. Read it before you publish it: it describes what the law already grants, but only you know how your shop handles a claim, and it has no legal value until you have made it yours."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "For placing the notice somewhere the settings above do not reach."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "the official notice printed in the page, at full size, with the Your Europe link and the national note under it. For a page devoted to the guarantee, where the notice is the content rather than a reminder."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "your guarantee terms, the text above."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php
+msgid "the button that opens the notice in a modal. Accepts label, class and style, the same three styles as the placements."
+msgstr ""

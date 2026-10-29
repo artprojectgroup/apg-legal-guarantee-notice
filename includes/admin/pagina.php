@@ -200,8 +200,7 @@ function apg_guarantee_missing_placement_notice() {
 		return;
 	}
 
-	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-	$own    = $screen && false !== strpos( (string) $screen->id, 'apg-legal-guarantee-notice' );
+	$own = apg_guarantee_es_pantalla_propia();
 
 	printf(
 		'<div class="notice notice-warning%1$s"><p><strong>%2$s</strong> %3$s%4$s</p></div>',
@@ -215,4 +214,32 @@ function apg_guarantee_missing_placement_notice() {
 		)
 	);
 }
-add_action( 'admin_notices', 'apg_guarantee_missing_placement_notice' );
+
+/**
+ * Whether the screen being drawn is the plugin's own settings screen.
+ *
+ * @return bool
+ */
+function apg_guarantee_es_pantalla_propia() {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+	return $screen && false !== strpos( (string) $screen->id, 'apg-legal-guarantee-notice' );
+}
+
+/**
+ * Shows the warning everywhere in the admin except on the settings screen.
+ *
+ * That screen prints it itself, under the header and right above the settings
+ * it is talking about, which is where it belongs. Without this it would come
+ * out twice there: once from this hook and once from the screen.
+ *
+ * @return void
+ */
+function apg_guarantee_missing_placement_admin_notice() {
+	if ( apg_guarantee_es_pantalla_propia() ) {
+		return;
+	}
+
+	apg_guarantee_missing_placement_notice();
+}
+add_action( 'admin_notices', 'apg_guarantee_missing_placement_admin_notice' );

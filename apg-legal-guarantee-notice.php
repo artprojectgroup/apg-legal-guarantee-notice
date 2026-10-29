@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: APG Legal Guarantee Notice
-Version: 0.3.0
+Version: 0.4.0
 Plugin URI: https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal
 Description: Shows the official EU harmonised notice on the legal guarantee of conformity, as Article 22a of Directive 2011/83/EU requires since 27 September 2026.
 Author URI: https://artprojectgroup.es/
@@ -23,7 +23,7 @@ Domain Path: /languages
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'apg_guarantee_VERSION', '0.3.0' );
+define( 'apg_guarantee_VERSION', '0.4.0' );
 define( 'apg_guarantee_DIRECCION', __FILE__ );
 
 /**
@@ -146,7 +146,7 @@ function apg_guarantee_admin_menu() {
 	$menu   = esc_attr__( 'Legal guarantee', 'apg-legal-guarantee-notice' );
 
 	if ( apg_guarantee_con_woocommerce() ) {
-		add_submenu_page(
+		$pantalla = add_submenu_page(
 			'woocommerce',
 			$titulo,
 			$menu,
@@ -155,18 +155,42 @@ function apg_guarantee_admin_menu() {
 			'apg_guarantee_pantalla_ajustes'
 		);
 
+		apg_guarantee_ayuda_contextual( $pantalla );
+
 		return;
 	}
 
-	add_options_page(
+	$pantalla = add_options_page(
 		$titulo,
 		$menu,
 		apg_guarantee_capacidad(),
 		'apg-legal-guarantee-notice',
 		'apg_guarantee_pantalla_ajustes'
 	);
+
+	apg_guarantee_ayuda_contextual( $pantalla );
 }
 add_action( 'admin_menu', 'apg_guarantee_admin_menu' );
+
+/**
+ * Adds the contextual help to the settings screen, wherever it ended up.
+ *
+ * The screen hangs off WooCommerce's menu when it is installed and off Settings
+ * when it is not, so the hook the help loads on is whatever the function that
+ * registered it returned. A screen that was not registered, because the user
+ * cannot reach it, returns false and gets nothing.
+ *
+ * @param string|false $pantalla Hook name of the settings screen.
+ * @return void
+ */
+function apg_guarantee_ayuda_contextual( $pantalla ) {
+	if ( ! $pantalla ) {
+		return;
+	}
+
+	require_once plugin_dir_path( __FILE__ ) . 'includes/clases/class-apg-guarantee-help.php';
+	add_action( 'load-' . $pantalla, array( 'APG_Guarantee_Help', 'add_tabs' ) );
+}
 
 /**
  * Adds a Settings link to the plugin row.

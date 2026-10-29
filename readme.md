@@ -12,7 +12,7 @@ Tested up to: 7.2
 
 Requires PHP: 7.4
 
-Stable tag: 0.3.0
+Stable tag: 0.4.0
 
 WC requires at least: 7.0
 
@@ -49,6 +49,7 @@ Desde el **27 de septiembre de 2026**, el artículo 22 bis de la Directiva 2011/
 - El navegador cachea el aviso un año, así que cuesta una petición por visitante.
 - Funciona con WooCommerce y sin él: con él el aviso llega a Finalizar compra y a los correos de pedido, y sin él todo lo demás sigue funcionando.
 - El plugin no fija ningún color, borde ni tipografía salvo que se lo pidas, así que hereda la estética de tu tema, también en temas oscuros.
+- Ayuda contextual dentro del plugin, en la pestaña _Ayuda_ de la pantalla de ajustes, con un panel por cada bloque y enlace a la documentación completa.
 
 ### Traducciones
 
@@ -57,7 +58,13 @@ Desde el **27 de septiembre de 2026**, el artículo 22 bis de la Directiva 2011/
 
 ### Soporte técnico
 
-**APG Aviso de Garantía Legal** es un plugin gratuito. **Art Project Group** no presta soporte técnico gratuito, pero ofrece un servicio de [soporte técnico](https://artprojectgroup.es/tienda/ticket-de-soporte) de pago para la instalación y configuración.
+**APG Aviso de Garantía Legal** es un plugin gratuito. **Art Project Group** no presta soporte técnico gratuito, pero ofrece un servicio de [soporte técnico](https://artprojectgroup.es/tienda/soporte-tecnico) de pago para la instalación y configuración.
+
+### Más información
+
+Puedes obtener más información sobre **APG Aviso de Garantía Legal** en nuestro [sitio web oficial](https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal) y seguir el desarrollo en [GitHub](https://github.com/artprojectgroup/apg-legal-guarantee-notice).
+
+Tienes la [documentación completa](https://artprojectgroup.es/documentacion/apg-aviso-de-garantia-legal), con cada ajuste explicado uno a uno.
 
 ## Instalación
 
@@ -122,6 +129,11 @@ Para pintar tus condiciones para profesionales donde se ha ocultado el aviso, us
 No. Aquel es el artículo 11 bis, que añadió la Directiva (UE) 2023/2673, y lo cubre nuestro [APG Desistimiento para WooCommerce](https://wordpress.org/plugins/apg-withdrawal-for-woocommerce/). Este plugin cubre el artículo 22 bis, que es una obligación distinta. Puedes usar los dos a la vez.
 
 ## Changelog
+
+### 0.4.0
+
+* Nueva ayuda contextual en la pantalla de ajustes, con un panel por cada bloque y enlace a la documentación completa.
+* El aviso de que el aviso legal no se está mostrando en ningún sitio ya no sale dos veces en la pantalla del plugin.
 
 ### 0.3.0
 

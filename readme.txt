@@ -5,7 +5,7 @@ Tags: legal guarantee, consumer rights, woocommerce, eu, conformity
 Requires at least: 6.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 0.3.0
+Stable tag: 0.4.0
 WC requires at least: 7.0
 WC tested up to: 11.2.0
 License: GNU General Public License v3 or later
@@ -37,13 +37,19 @@ Since **27 September 2026**, Article 22a of Directive 2011/83/EU requires every 
 * The notice is cached by the browser for a year, so it costs one request per visitor.
 * Works with or without WooCommerce: with it the notice reaches the checkout and the order emails, without it everything else still works.
 * No colour, border or font is set by the plugin unless you ask for it, so it inherits the look of your theme, dark themes included.
+* Contextual help inside the plugin, in the *Help* tab of the settings screen, with one panel per block and a link to the full documentation.
 
 = Translations =
 * English: by [Art Project Group](https://artprojectgroup.es/) (default language).
 * Spanish: by [Art Project Group](https://artprojectgroup.es/).
 
 = Technical support =
-**APG Legal Guarantee Notice** is a free plugin. **Art Project Group** does not provide free technical support, but offers a paid [technical support](https://artprojectgroup.es/tienda/ticket-de-soporte) service for installation and configuration.
+**APG Legal Guarantee Notice** is a free plugin. **Art Project Group** does not provide free technical support, but offers a paid [technical support](https://artprojectgroup.es/tienda/soporte-tecnico) service for installation and configuration.
+
+= More information =
+You can learn more about **APG Legal Guarantee Notice** on our [official website](https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal), and follow the development on [GitHub](https://github.com/artprojectgroup/apg-legal-guarantee-notice).
+
+You can also read the [full documentation](https://artprojectgroup.es/documentacion/apg-aviso-de-garantia-legal), with every setting explained one by one.
 
 == Installation ==
 
@@ -101,6 +107,10 @@ No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covere
 2. The settings screen.
 
 == Changelog ==
+= 0.4.0 =
+* New contextual help on the settings screen, with one panel per block and a link to the full documentation.
+* The warning that the notice is not being shown anywhere no longer appears twice on the plugin's own screen.
+
 = 0.3.0 =
 * New hooks to hide the notice per placement and per customer (for instance from trade customers), change its texts and the email attachment, and add your own content before, after or instead of it.
 * The national note in the email is now translated with WPML and Polylang, as on the website.
@@ -116,6 +126,9 @@ No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covere
 * First release.
 
 == Upgrade Notice ==
+= 0.4.0 =
+* New contextual help on the settings screen, with one panel per block.
+
 = 0.3.0 =
 * New hooks to hide the notice per placement and per customer, change its texts and add your own content around it.
 
