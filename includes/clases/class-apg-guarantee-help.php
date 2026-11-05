@@ -14,16 +14,6 @@ defined( 'ABSPATH' ) || exit;
 class APG_Guarantee_Help {
 
 	/**
-	 * Dirección de la documentación completa, en español.
-	 */
-	const DOCS_URL = 'https://artprojectgroup.es/documentacion/apg-aviso-de-garantia-legal';
-
-	/**
-	 * Dirección de la documentación completa, en inglés.
-	 */
-	const DOCS_URL_EN = 'https://artprojectgroup.com/documentation/apg-aviso-de-garantia-legal';
-
-	/**
 	 * Sustituye la ayuda de la pantalla por los paneles del plugin.
 	 *
 	 * La pantalla cuelga del menú de WooCommerce cuando está instalado y del de Ajustes cuando no,
@@ -68,7 +58,10 @@ class APG_Guarantee_Help {
 	 * @return string
 	 */
 	private static function documentacion() {
-		return ( 0 === strpos( get_user_locale(), 'es' ) ) ? self::DOCS_URL : self::DOCS_URL_EN;
+		//El idioma lo decide apg_guarantee_datos(), que es quien guarda las dos direcciones.
+		$datos = apg_guarantee_datos();
+
+		return $datos['documentacion'];
 	}
 
 	/**

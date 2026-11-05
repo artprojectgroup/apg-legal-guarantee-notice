@@ -9,15 +9,13 @@ Tags: legal guarantee, consumer rights, woocommerce, eu, conformity
 Requires at least: 6.0
 
 Tested up to: 7.2
-
 Requires PHP: 7.4
 
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 
 WC requires at least: 7.0
 
-WC tested up to: 11.2.0
-
+WC tested up to: 11.2.1
 License: GNU General Public License v3 or later
 
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -129,6 +127,9 @@ Para pintar tus condiciones para profesionales donde se ha ocultado el aviso, us
 No. Aquel es el artículo 11 bis, que añadió la Directiva (UE) 2023/2673, y lo cubre nuestro [APG Desistimiento para WooCommerce](https://wordpress.org/plugins/apg-withdrawal-for-woocommerce/). Este plugin cubre el artículo 22 bis, que es una obligación distinta. Puedes usar los dos a la vez.
 
 ## Changelog
+
+### 0.4.1
+- Los enlaces a la web, a la documentación, a la donación y al soporte se abren en el idioma de quien mira la pantalla.
 
 ### 0.4.0
 

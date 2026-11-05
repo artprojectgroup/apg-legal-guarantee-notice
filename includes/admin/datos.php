@@ -22,11 +22,16 @@ defined( 'ABSPATH' ) || exit;
 function apg_guarantee_datos() {
 	$slug = 'apg-legal-guarantee-notice';
 
+	//Las direcciones de la web se sirven en el idioma de quien mira la pantalla, que se sabe
+	//porque esta funcion se llama al pintar cada pantalla y no al cargar el plugin.
+	$espanol = ( 0 === strpos( get_user_locale(), 'es' ) );
+
 	return array(
 		'plugin'     => __( 'APG Legal Guarantee Notice', 'apg-legal-guarantee-notice' ),
 		'plugin_uri' => $slug,
-		'plugin_url' => 'https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal',
-		'donacion'   => 'https://artprojectgroup.es/tienda/donacion',
+		'plugin_url' => $espanol ? 'https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal' : 'https://artprojectgroup.com/wordpress-plugins/apg-legal-guarantee-notice',
+		'donacion'   => $espanol ? 'https://artprojectgroup.es/tienda/donacion' : 'https://artprojectgroup.com/shop/donation',
+		'documentacion' => $espanol ? 'https://artprojectgroup.es/documentacion/apg-aviso-de-garantia-legal' : 'https://artprojectgroup.com/documentation/apg-legal-guarantee-notice',
 		'soporte'    => 'https://wordpress.org/support/plugin/' . $slug . '/',
 		'puntuacion' => 'https://wordpress.org/support/plugin/' . $slug . '/reviews/',
 		'ajustes'    => 'admin.php?page=' . $slug,

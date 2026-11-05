@@ -1,11 +1,11 @@
 === APG Legal Guarantee Notice ===
 Contributors: artprojectgroup
-Donate link: https://artprojectgroup.es/tienda/donacion
+Donate link: https://artprojectgroup.com/shop/donation
 Tags: legal guarantee, consumer rights, woocommerce, eu, conformity
 Requires at least: 6.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 WC requires at least: 7.0
 WC tested up to: 11.2.1
 License: GNU General Public License v3 or later
@@ -40,16 +40,16 @@ Since **27 September 2026**, Article 22a of Directive 2011/83/EU requires every 
 * Contextual help inside the plugin, in the *Help* tab of the settings screen, with one panel per block and a link to the full documentation.
 
 = Translations =
-* English: by [Art Project Group](https://artprojectgroup.es/) (default language).
-* Spanish: by [Art Project Group](https://artprojectgroup.es/).
+* English: by [Art Project Group](https://artprojectgroup.com/) (default language).
+* Spanish: by [Art Project Group](https://artprojectgroup.com/).
 
 = Technical support =
-**APG Legal Guarantee Notice** is a free plugin. **Art Project Group** does not provide free technical support, but offers a paid [technical support](https://artprojectgroup.es/tienda/soporte-tecnico) service for installation and configuration.
+**APG Legal Guarantee Notice** is a free plugin. **Art Project Group** does not provide free technical support, but offers a paid [technical support](https://artprojectgroup.com/shop/technical-support) service for installation and configuration.
 
 = More information =
-You can learn more about **APG Legal Guarantee Notice** on our [official website](https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal), and follow the development on [GitHub](https://github.com/artprojectgroup/apg-legal-guarantee-notice).
+You can learn more about **APG Legal Guarantee Notice** on our [official website](https://artprojectgroup.com/wordpress-plugins/apg-legal-guarantee-notice), and follow the development on [GitHub](https://github.com/artprojectgroup/apg-legal-guarantee-notice).
 
-You can also read the [full documentation](https://artprojectgroup.es/documentacion/apg-aviso-de-garantia-legal), with every setting explained one by one.
+You can also read the [full documentation](https://artprojectgroup.com/documentation/apg-legal-guarantee-notice), with every setting explained one by one.
 
 == Installation ==
 
@@ -107,6 +107,8 @@ No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covere
 2. The settings screen.
 
 == Changelog ==
+= 0.4.1 =
+* The links to the website, the documentation, the donation and the support now open in the language of whoever is looking at the screen.
 = 0.4.0 =
 * New contextual help on the settings screen, with one panel per block and a link to the full documentation.
 * The warning that the notice is not being shown anywhere no longer appears twice on the plugin's own screen.
@@ -141,7 +143,7 @@ No. That one is Article 11a, added by Directive (EU) 2023/2673, and it is covere
 
 Thanks to everyone who uses the plugin, helps improve it, makes a donation or encourages us with their comments.
 
-If you find this plugin useful, you can support its development with a [small donation](https://artprojectgroup.es/tienda/donacion).
+If you find this plugin useful, you can support its development with a [small donation](https://artprojectgroup.com/shop/donation).
 
 == The bundled notice files ==
 
