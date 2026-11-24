@@ -1,24 +1,1149 @@
+# Copyright (C) 2026 Art Project Group
+# This file is distributed under the GNU General Public License v3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: APG Legal Guarantee Notice 0.1.0\n"
-"POT-Creation-Date: 2026-09-30 18:39+0000\n"
+"Project-Id-Version: APG Legal Guarantee Notice 0.5.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/apg-legal-guarantee-notice\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-23T22:15:46+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: apg-legal-guarantee-notice\n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: apg-legal-guarantee-notice.php:108
+#. Plugin Name of the plugin
+#: apg-legal-guarantee-notice.php
+#: includes/admin/datos.php:30
+msgid "APG Legal Guarantee Notice"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: apg-legal-guarantee-notice.php
+msgid "https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal"
+msgstr ""
+
+#. Description of the plugin
+#: apg-legal-guarantee-notice.php
+msgid "Shows the official EU harmonised notice on the legal guarantee of conformity, as Article 22a of Directive 2011/83/EU requires since 27 September 2026."
+msgstr ""
+
+#. Author of the plugin
+#: apg-legal-guarantee-notice.php
+msgid "Art Project Group"
+msgstr ""
+
+#. Author URI of the plugin
+#: apg-legal-guarantee-notice.php
+msgid "https://artprojectgroup.es/"
+msgstr ""
+
+#: apg-legal-guarantee-notice.php:153
+#: includes/clases/bloques.php:83
 msgid "Legal guarantee notice"
 msgstr ""
 
-#: apg-legal-guarantee-notice.php:109 includes/admin/pagina.php:64
+#: apg-legal-guarantee-notice.php:154
+#: includes/admin/pagina.php:64
 msgid "Legal guarantee"
 msgstr ""
 
-#: apg-legal-guarantee-notice.php:128
+#: apg-legal-guarantee-notice.php:216
 msgid "Settings"
+msgstr ""
+
+#: includes/admin/ajustes.php:19
+#: includes/clases/bloques.php:43
+msgid "Text only (recommended)"
+msgstr ""
+
+#: includes/admin/ajustes.php:20
+#: includes/clases/bloques.php:47
+msgid "Icon and text"
+msgstr ""
+
+#: includes/admin/ajustes.php:21
+#: includes/clases/bloques.php:51
+msgid "Icon only"
+msgstr ""
+
+#: includes/admin/ajustes.php:49
+msgid "Do not show it"
+msgstr ""
+
+#: includes/admin/ajustes.php:52
+msgid "A sentence that opens it on the first click"
+msgstr ""
+
+#: includes/admin/ajustes.php:53
+msgid "The whole notice, with nothing to click"
+msgstr ""
+
+#: includes/admin/ajustes.php:79
+#: includes/clases/class-apg-guarantee-help.php:125
+msgid "Whatever surrounds it (recommended)"
+msgstr ""
+
+#: includes/admin/ajustes.php:80
+#: includes/clases/class-apg-guarantee-help.php:127
+msgid "Like a link of this theme"
+msgstr ""
+
+#: includes/admin/ajustes.php:81
+#: includes/clases/class-apg-guarantee-help.php:126
+msgid "Like a button of this theme"
+msgstr ""
+
+#: includes/admin/ajustes.php:82
+#: includes/clases/class-apg-guarantee-help.php:128
+msgid "Colours I choose"
+msgstr ""
+
+#: includes/admin/ajustes.php:86
+#: includes/admin/ajustes.php:510
+#: includes/clases/class-apg-guarantee-help.php:187
+msgid "Text"
+msgstr ""
+
+#: includes/admin/ajustes.php:87
+msgid "Background"
+msgstr ""
+
+#: includes/admin/ajustes.php:88
+msgid "Text on hover"
+msgstr ""
+
+#: includes/admin/ajustes.php:89
+msgid "Background on hover"
+msgstr ""
+
+#: includes/admin/ajustes.php:104
+msgid "Inherit"
+msgstr ""
+
+#: includes/admin/ajustes.php:108
+msgid "Font size, in pixels"
+msgstr ""
+
+#: includes/admin/ajustes.php:109
+msgid "Theme"
+msgstr ""
+
+#: includes/admin/ajustes.php:122
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: includes/admin/ajustes.php:130
+msgid "APG Legal Guarantee Notice Options."
+msgstr ""
+
+#: includes/admin/ajustes.php:133
+msgid "Article 22a of Directive 2011/83/EU has required every shop selling goods to display the official EU notice on the legal guarantee of conformity since 27 September 2026. The plugin ships the notice exactly as the European Commission publishes it, in the 24 official EU languages, and serves the one that matches each visitor."
+msgstr ""
+
+#. translators: %s: two-letter language code, e.g. ES.
+#: includes/admin/ajustes.php:150
+#, php-format
+msgid "Right now this screen would show the notice in: %s."
+msgstr ""
+
+#: includes/admin/ajustes.php:159
+#: includes/clases/class-apg-guarantee-help.php:104
+msgid "Preview it"
+msgstr ""
+
+#: includes/admin/ajustes.php:170
+#: includes/clases/class-apg-guarantee-help.php:113
+msgid "Floating button"
+msgstr ""
+
+#: includes/admin/ajustes.php:171
+msgid "Floats over the page wherever you choose, on every page of the shop. On its own this satisfies the obligation: the Commission describes the notice as a general reminder placed on the seller's website, at shop level rather than per product."
+msgstr ""
+
+#: includes/admin/ajustes.php:174
+msgid "Position"
+msgstr ""
+
+#: includes/admin/ajustes.php:177
+msgid "— Do not show it —"
+msgstr ""
+
+#: includes/admin/ajustes.php:180
+msgid "Top left"
+msgstr ""
+
+#: includes/admin/ajustes.php:181
+msgid "Top right"
+msgstr ""
+
+#: includes/admin/ajustes.php:182
+msgid "Middle left"
+msgstr ""
+
+#: includes/admin/ajustes.php:183
+msgid "Middle right"
+msgstr ""
+
+#: includes/admin/ajustes.php:184
+msgid "Bottom left"
+msgstr ""
+
+#: includes/admin/ajustes.php:185
+msgid "Bottom right"
+msgstr ""
+
+#: includes/admin/ajustes.php:195
+#: includes/admin/ajustes.php:240
+#: includes/admin/ajustes.php:263
+#: includes/admin/ajustes.php:301
+#: includes/admin/ajustes.php:353
+#: includes/admin/ajustes.php:369
+#: includes/clases/class-apg-guarantee-help.php:120
+msgid "How it looks"
+msgstr ""
+
+#: includes/admin/ajustes.php:197
+#: includes/admin/ajustes.php:242
+#: includes/admin/ajustes.php:265
+#: includes/admin/ajustes.php:303
+#: includes/admin/ajustes.php:355
+#: includes/admin/ajustes.php:371
+#: includes/clases/bloques.php:39
+#: includes/clases/class-apg-guarantee-help.php:123
+msgid "Shows"
+msgstr ""
+
+#: includes/admin/ajustes.php:199
+#: includes/admin/ajustes.php:244
+#: includes/admin/ajustes.php:267
+#: includes/admin/ajustes.php:305
+#: includes/admin/ajustes.php:357
+#: includes/admin/ajustes.php:373
+#: includes/clases/class-apg-guarantee-help.php:124
+msgid "Takes its colours from"
+msgstr ""
+
+#: includes/admin/ajustes.php:205
+#: includes/clases/class-apg-guarantee-help.php:114
+msgid "Menu"
+msgstr ""
+
+#: includes/admin/ajustes.php:208
+msgid "Add it to"
+msgstr ""
+
+#: includes/admin/ajustes.php:213
+msgid "— Do not add it —"
+msgstr ""
+
+#: includes/admin/ajustes.php:218
+msgid "Added as the last item of that menu, wherever the theme prints it."
+msgstr ""
+
+#. translators: %s: title of the page the menu item links to.
+#: includes/admin/ajustes.php:224
+#, php-format
+msgid "It is an ordinary link to \"%s\", so your theme styles it exactly like the rest of the menu."
+msgstr ""
+
+#: includes/admin/ajustes.php:231
+msgid "With no page chosen below, the item opens the notice in the modal instead of linking anywhere. Choosing or creating a page turns it into an ordinary menu link, which is what a theme knows how to style."
+msgstr ""
+
+#: includes/admin/ajustes.php:235
+msgid "This site has no menus yet."
+msgstr ""
+
+#: includes/admin/ajustes.php:246
+msgid "Left on the first option the item is indistinguishable from the rest of the menu, which is usually what you want here."
+msgstr ""
+
+#: includes/admin/ajustes.php:251
+#: includes/clases/class-apg-guarantee-help.php:115
+msgid "Site footer"
+msgstr ""
+
+#: includes/admin/ajustes.php:254
+msgid "Show it"
+msgstr ""
+
+#: includes/admin/ajustes.php:258
+msgid "Add it to the footer of every page"
+msgstr ""
+
+#: includes/admin/ajustes.php:282
+#: includes/clases/class-apg-guarantee-help.php:133
+msgid "Checkout and emails"
+msgstr ""
+
+#: includes/admin/ajustes.php:285
+#: includes/clases/class-apg-guarantee-help.php:136
+msgid "Checkout"
+msgstr ""
+
+#: includes/admin/ajustes.php:289
+msgid "Show it above the place-order button"
+msgstr ""
+
+#: includes/admin/ajustes.php:294
+#: includes/clases/class-apg-guarantee-help.php:137
+msgid "How it is shown"
+msgstr ""
+
+#: includes/admin/ajustes.php:297
+msgid "The Commission's guidelines illustrate the sentence that opens the notice. Part of the German doctrine reads the law as asking for the whole notice at the checkout, with nothing to click; if you sell in Germany or Austria, or prefer to be on the safe side, choose the whole notice."
+msgstr ""
+
+#: includes/admin/ajustes.php:307
+msgid "For the sentence; the whole notice is the Commission's image and has no look of its own."
+msgstr ""
+
+#: includes/admin/ajustes.php:311
+#: includes/clases/class-apg-guarantee-help.php:138
+msgid "Order email"
+msgstr ""
+
+#: includes/admin/ajustes.php:315
+msgid "Include the notice in the customer order emails"
+msgstr ""
+
+#: includes/admin/ajustes.php:317
+msgid "The notice goes in as an image, since an email client cannot open a modal. The Commission's guidelines ask for it here too."
+msgstr ""
+
+#: includes/admin/ajustes.php:321
+#: includes/clases/class-apg-guarantee-help.php:139
+msgid "Only with goods"
+msgstr ""
+
+#: includes/admin/ajustes.php:325
+msgid "Leave the notice out of purchases made only of virtual products"
+msgstr ""
+
+#: includes/admin/ajustes.php:327
+msgid "The legal guarantee of the notice covers goods. A course, a subscription or a download is not one. Applies to the checkout, the cart, the product page, the order email and the invoice; the floating button, the menu and the footer remind the whole shop and stay where they are."
+msgstr ""
+
+#: includes/admin/ajustes.php:331
+#: includes/clases/class-apg-guarantee-help.php:140
+msgid "Record on the order"
+msgstr ""
+
+#: includes/admin/ajustes.php:335
+msgid "Leave a private note on each order saying what the customer was shown"
+msgstr ""
+
+#: includes/admin/ajustes.php:337
+msgid "How and in which language the notice was shown at the checkout, the EU GARAN labels shown, and the first email that carried the official PDF. It is your proof if a customer or an authority ever asks."
+msgstr ""
+
+#: includes/admin/ajustes.php:342
+#: includes/clases/class-apg-guarantee-help.php:145
+msgid "Product page and cart"
+msgstr ""
+
+#: includes/admin/ajustes.php:343
+msgid "Not required: the obligation is met at shop level. They put the notice next to the decision to buy, which is one of the places the Commission's guidelines illustrate."
+msgstr ""
+
+#: includes/admin/ajustes.php:346
+#: includes/clases/class-apg-guarantee-help.php:148
+msgid "Product page"
+msgstr ""
+
+#: includes/admin/ajustes.php:349
+msgid "Under the add-to-cart button."
+msgstr ""
+
+#: includes/admin/ajustes.php:362
+#: includes/clases/class-apg-guarantee-help.php:149
+msgid "Cart"
+msgstr ""
+
+#: includes/admin/ajustes.php:365
+msgid "Under the cart totals."
+msgstr ""
+
+#: includes/admin/ajustes.php:379
+#: includes/clases/bloques.php:133
+#: includes/clases/class-apg-guarantee-help.php:154
+#: includes/clases/salud.php:29
+msgid "EU GARAN label"
+msgstr ""
+
+#: includes/admin/ajustes.php:380
+msgid "The label of the commercial guarantee of durability that a producer can offer: free of charge, for the whole product and for more than two years. It is the producer's, so it goes per product: fill in the EU GARAN tab of the product with what the producer gives you, and the plugin draws the official label with it. It is shown on the product page, before the place-order button, as a line in the cart and in the order email."
+msgstr ""
+
+#: includes/admin/ajustes.php:383
+msgid "On the product page"
+msgstr ""
+
+#: includes/admin/ajustes.php:387
+msgid "The full label"
+msgstr ""
+
+#: includes/admin/ajustes.php:388
+msgid "The nested label, which opens the full one on the first click"
+msgstr ""
+
+#: includes/admin/ajustes.php:397
+msgid "Before the place-order button it is always the nested label, one per product, as the guidelines allow where space is short; in the email it is always the full one."
+msgstr ""
+
+#: includes/admin/ajustes.php:402
+#: includes/clases/class-apg-guarantee-help.php:165
+msgid "PDF invoices"
+msgstr ""
+
+#: includes/admin/ajustes.php:405
+msgid "Invoice"
+msgstr ""
+
+#: includes/admin/ajustes.php:409
+msgid "Add a reminder of the legal guarantee, and the EU GARAN label of each line, to the invoices"
+msgstr ""
+
+#: includes/admin/ajustes.php:412
+msgid "For the invoices of PDF Invoices & Packing Slips for WooCommerce, by WP Overnight. The notice itself already travels as a PDF with the order email; the invoice gets a short reminder with the Your Europe link and the national note."
+msgstr ""
+
+#: includes/admin/ajustes.php:414
+msgid "That plugin is not active on this site, so this setting does nothing for now."
+msgstr ""
+
+#: includes/admin/ajustes.php:423
+#: includes/admin/ajustes.php:455
+#: includes/clases/bloques.php:37
+#: includes/clases/class-apg-guarantee-help.php:177
+msgid "Wording"
+msgstr ""
+
+#: includes/admin/ajustes.php:427
+#: includes/clases/class-apg-guarantee-help.php:175
+msgid "Wording that opens it"
+msgstr ""
+
+#: includes/admin/ajustes.php:432
+msgid "Used by every placement. The notice opens on the first click on it, which is the pattern the Commission illustrates. Leave it empty for the default wording."
+msgstr ""
+
+#: includes/admin/ajustes.php:435
+msgid "The Commission's guidelines describe this as \"a sentence informing consumers about their legal guarantee rights\", and every example they give is written text. They do provide a compact graphic for the GARAN label, and deliberately none for this notice. Icon only keeps the wording for screen readers and in the tooltip, but a visitor on a phone never sees it, since there is no hover on a touch screen."
+msgstr ""
+
+#: includes/admin/ajustes.php:441
+msgid "National note"
+msgstr ""
+
+#: includes/admin/ajustes.php:442
+msgid "The official notice says \"minimum two years\" because that is the European floor, and the file may not be edited. Where your country grants longer, tell the customer beside the notice."
+msgstr ""
+
+#: includes/admin/ajustes.php:445
+#: includes/clases/class-apg-guarantee-help.php:176
+msgid "Show the note"
+msgstr ""
+
+#: includes/admin/ajustes.php:449
+msgid "Show a national note next to the notice"
+msgstr ""
+
+#: includes/admin/ajustes.php:459
+msgid "Leave it empty for the default, which depends on the country of your shop: the three years of Article 120.1 TRLGDCU in Spain, the three years of Decree-Law 84/2021 in Portugal, or the three years to claim of the Swedish Consumer Sales Act."
+msgstr ""
+
+#: includes/admin/ajustes.php:464
+#: includes/clases/class-apg-guarantee-help.php:178
+msgid "Terms and conditions page"
+msgstr ""
+
+#: includes/admin/ajustes.php:487
+#: includes/admin/ajustes.php:494
+msgid "— None —"
+msgstr ""
+
+#: includes/admin/ajustes.php:499
+msgid "Linked from the national note, and the page the menu item points at. Defaults to the Terms and conditions page of WooCommerce, which is not the same thing as the privacy policy page."
+msgstr ""
+
+#: includes/admin/ajustes.php:505
+#: includes/clases/class-apg-guarantee-help.php:184
+msgid "Your guarantee terms"
+msgstr ""
+
+#: includes/admin/ajustes.php:506
+msgid "The official notice is the European summary and cannot be edited. What it does not say is what your shop does: how long the guarantee runs here, how a customer claims it and who they write to. That text is yours, and the plugin only gives you a starting point for it."
+msgstr ""
+
+#. translators: %s: the shortcode, already wrapped in a code tag.
+#: includes/admin/ajustes.php:518
+#, php-format
+msgid "Shown by the %s shortcode. Leave it empty to use the suggested text, which appears greyed out above."
+msgstr ""
+
+#: includes/admin/ajustes.php:524
+msgid "Read it before you publish it."
+msgstr ""
+
+#: includes/admin/ajustes.php:525
+msgid "It describes what the law already grants, but only you know how your shop handles a claim, and the text has no legal value until you have made it yours."
+msgstr ""
+
+#: includes/admin/ajustes.php:531
+msgid "Shortcodes"
+msgstr ""
+
+#: includes/admin/ajustes.php:535
+msgid "The official notice printed in the page, at full size. For a page devoted to the guarantee, where the notice is the content rather than a reminder."
+msgstr ""
+
+#: includes/admin/ajustes.php:539
+msgid "Your guarantee terms, the text above."
+msgstr ""
+
+#: includes/admin/ajustes.php:543
+msgid "The button that opens the notice in a modal, for placing it somewhere the settings above do not reach."
+msgstr ""
+
+#. translators: %s plugin name
+#: includes/admin/datos.php:54
+#: includes/cuadro-informacion.php:55
+#, php-format
+msgid "Please, rate %s:"
+msgstr ""
+
+#: includes/admin/datos.php:63
+#: includes/admin/datos.php:80
+msgid "Unknown rating"
+msgstr ""
+
+#: includes/admin/datos.php:183
+#: includes/cuadro-informacion.php:45
+msgid "Support"
+msgstr ""
+
+#: includes/admin/datos.php:184
+msgid "Donate"
+msgstr ""
+
+#: includes/admin/funciones-apg.php:211
+msgid "In Portugal the legal guarantee on goods is three years from delivery, longer than the two-year European minimum stated in the notice."
+msgstr ""
+
+#: includes/admin/funciones-apg.php:214
+msgid "In Sweden you can claim a lack of conformity for three years from delivery, longer than the two-year European minimum stated in the notice."
+msgstr ""
+
+#: includes/admin/funciones-apg.php:219
+msgid "In Spain the legal guarantee on new goods is three years from delivery, longer than the two-year European minimum stated in the notice."
+msgstr ""
+
+#: includes/admin/funciones-apg.php:240
+msgid "Every item we sell is covered by the legal guarantee of conformity. If what you receive does not match its description, or does not work as it should, you are entitled to have it repaired or replaced free of charge, and where that is not possible, to a price reduction or a refund."
+msgstr ""
+
+#: includes/admin/funciones-apg.php:244
+msgid "The guarantee runs for three years from delivery on new goods, as Article 120.1 of the Spanish consumer act establishes. On second-hand goods the period is the one agreed at the time of sale, and never less than one year."
+msgstr ""
+
+#: includes/admin/funciones-apg.php:246
+msgid "You can claim the guarantee for three years from delivery, as the consumer law of this country establishes. On second-hand goods the period may be shorter where the law allows it."
+msgstr ""
+
+#: includes/admin/funciones-apg.php:248
+msgid "The guarantee runs for at least two years from delivery. On second-hand goods the period may be shorter, and never less than one year."
+msgstr ""
+
+#: includes/admin/funciones-apg.php:251
+msgid "To claim it, write to us with your order number and a description of the problem, along with proof of purchase such as the receipt, the invoice or a bank statement. We will tell you how to proceed and cover the cost of returning the item when it has to come back to us."
+msgstr ""
+
+#: includes/admin/funciones-apg.php:252
+msgid "This legal guarantee applies on top of any commercial guarantee offered by us or by the producer, and is never replaced by it."
+msgstr ""
+
+#: includes/admin/garan-producto.php:23
+msgid "EU GARAN"
+msgstr ""
+
+#: includes/admin/garan-producto.php:53
+msgid "Fill this in only when the producer offers a commercial guarantee of durability for this product: free of charge, for the whole product and for more than two years. The label shows it; the three fields below are the ones the producer gives you, and the label stays off until they are all there."
+msgstr ""
+
+#: includes/admin/garan-producto.php:59
+msgid "Duration in years"
+msgstr ""
+
+#: includes/admin/garan-producto.php:60
+msgid "e.g. 5 or 2,5"
+msgstr ""
+
+#: includes/admin/garan-producto.php:62
+msgid "More than two years, in whole or half years: 3, 5, 10 or 2,5. Other decimals are not allowed on the label."
+msgstr ""
+
+#: includes/admin/garan-producto.php:70
+msgid "Producer"
+msgstr ""
+
+#: includes/admin/garan-producto.php:72
+msgid "The name or brand of the producer offering the guarantee, as the producer gives it."
+msgstr ""
+
+#: includes/admin/garan-producto.php:80
+msgid "Model identifier"
+msgstr ""
+
+#: includes/admin/garan-producto.php:82
+msgid "The model the guarantee covers. In a variable product each variation can set its own, and leaves the rest to these fields."
+msgstr ""
+
+#: includes/admin/garan-producto.php:88
+#: includes/admin/garan-producto.php:337
+#: includes/clases/class-apg-guarantee-help.php:158
+msgid "Label from the producer"
+msgstr ""
+
+#: includes/admin/garan-producto.php:90
+msgid "Choose image"
+msgstr ""
+
+#: includes/admin/garan-producto.php:91
+msgid "Remove"
+msgstr ""
+
+#: includes/admin/garan-producto.php:92
+msgid "Optional. If the producer gave you the label already filled in, upload it here and it is shown as it came instead of being drawn."
+msgstr ""
+
+#: includes/admin/garan-producto.php:103
+msgid "Preview"
+msgstr ""
+
+#. translators: 1: product or variation name. 2: the value typed.
+#: includes/admin/garan-producto.php:134
+#, php-format
+msgid "EU GARAN, %1$s: \"%2$s\" is not a valid duration. It has to be more than two years, in whole or half years, such as 3, 5 or 2,5. The duration has not been saved."
+msgstr ""
+
+#. translators: %s: product or variation name.
+#: includes/admin/garan-producto.php:200
+#, php-format
+msgid "EU GARAN, %s: the label is not shown until the duration, the producer and the model identifier are all filled in, or a label from the producer is uploaded."
+msgstr ""
+
+#. translators: %s: product or variation name.
+#: includes/admin/garan-producto.php:214
+#, php-format
+msgid "EU GARAN, %s: the producer and the model identifier are too long for the line they share on the label, so they are printed smaller than the template sets them. Check the preview and shorten them if you can."
+msgstr ""
+
+#: includes/admin/garan-producto.php:241
+msgid "EU GARAN: duration in years"
+msgstr ""
+
+#: includes/admin/garan-producto.php:242
+msgid "EU GARAN: producer"
+msgstr ""
+
+#: includes/admin/garan-producto.php:243
+msgid "EU GARAN: model identifier"
+msgstr ""
+
+#: includes/admin/garan-producto.php:338
+msgid "Use this image"
+msgstr ""
+
+#: includes/admin/pagina.php:36
+#: includes/clases/class-apg-guarantee-help.php:179
+msgid "Create the page"
+msgstr ""
+
+#: includes/admin/pagina.php:38
+msgid "Creates a published page holding the official notice and your guarantee terms, and selects it here."
+msgstr ""
+
+#: includes/admin/pagina.php:53
+msgid "Security check failed."
+msgstr ""
+
+#: includes/admin/pagina.php:57
+msgid "You do not have permission to create this page."
+msgstr ""
+
+#: includes/admin/pagina.php:142
+msgid "The page could not be created."
+msgstr ""
+
+#: includes/admin/pagina.php:150
+msgid "The page has been created and selected as your terms and conditions page."
+msgstr ""
+
+#: includes/admin/pagina.php:152
+msgid "Edit it"
+msgstr ""
+
+#: includes/admin/pagina.php:154
+msgid "See it"
+msgstr ""
+
+#: includes/admin/pagina.php:208
+msgid "The legal guarantee notice is not being shown anywhere."
+msgstr ""
+
+#: includes/admin/pagina.php:209
+msgid "Article 22a requires it to be displayed at shop level. Turn on the floating button, the menu or the footer, or place it yourself with the shortcode."
+msgstr ""
+
+#: includes/admin/pagina.php:213
+#: includes/clases/salud.php:58
+msgid "Open the settings"
+msgstr ""
+
+#: includes/clases/bloques.php:38
+msgid "Leave it empty to use the wording from the settings."
+msgstr ""
+
+#: includes/clases/bloques.php:54
+msgid "Form"
+msgstr ""
+
+#: includes/clases/bloques.php:58
+msgid "Full label"
+msgstr ""
+
+#: includes/clases/bloques.php:62
+msgid "Nested label, opens the full one"
+msgstr ""
+
+#: includes/clases/bloques.php:65
+msgid "The EU GARAN label of the product appears here when the product has one."
+msgstr ""
+
+#: includes/clases/bloques.php:84
+msgid "The official EU notice on the legal guarantee of conformity, at full size, in the visitor's language."
+msgstr ""
+
+#: includes/clases/bloques.php:85
+#: includes/clases/bloques.php:98
+#: includes/clases/bloques.php:121
+#: includes/clases/bloques.php:135
+msgid "guarantee"
+msgstr ""
+
+#: includes/clases/bloques.php:96
+msgid "Legal guarantee button"
+msgstr ""
+
+#: includes/clases/bloques.php:97
+msgid "The sentence that opens the official notice on the first click."
+msgstr ""
+
+#: includes/clases/bloques.php:119
+msgid "Guarantee terms"
+msgstr ""
+
+#: includes/clases/bloques.php:120
+msgid "Your own guarantee terms, from the plugin settings."
+msgstr ""
+
+#: includes/clases/bloques.php:134
+msgid "The EU GARAN label of the product, for placing it somewhere else in the product template."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:51
+msgid "More help"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:52
+msgid "Full documentation"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:99
+msgid "The notice"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:101
+msgid "Article 22a of Directive 2011/83/EU has required every shop selling goods to consumers to display the official EU notice on the legal guarantee of conformity since 27 September 2026. Commission Implementing Regulation (EU) 2025/1960 fixes its design and its content."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:102
+msgid "There is nothing to write and nothing to design here: the plugin ships the Commission's own files, in the 24 official EU languages, and serves them untouched. The notice cannot be edited, cropped or redrawn, and the plugin will not let you."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:103
+msgid "The language follows the visitor"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:103
+msgid "not the site. A shop read in German serves the German notice. Catalan, Basque and Galician fall back on the Spanish notice rather than the English one."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:104
+msgid "opens the very notice a visitor would see right now, in the language named beside it."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:105
+msgid "It opens on the first click"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:105
+msgid "in a modal, the pattern the Commission's guidelines illustrate, built with the browser's own popover API and no JavaScript at all."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:110
+#: includes/clases/class-apg-guarantee-help.php:160
+msgid "Where it is shown"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:112
+msgid "The obligation is to display the notice at shop level, so one placement reaching every page is enough. Switch them all off and the plugin warns you on the dashboard, because then the notice is not reaching anybody."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:113
+msgid "floats over every page of the shop, in any of six positions. On out of the box, at the bottom right, and on its own it satisfies the obligation."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:114
+msgid "added as the last item of the menu you choose. With a page chosen below it is an ordinary link, which is what a theme knows how to style; with no page it opens the modal instead."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:115
+msgid "adds it to the footer of every page, wherever your theme prints the footer."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:122
+msgid "Every placement carries its own appearance, so the floating button can shout and the menu item can be indistinguishable from the rest of the menu. Out of the box nothing is imposed at all, which is what keeps the notice readable on a dark theme."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:123
+msgid "text, icon and text, or icon only. The Commission describes the notice as a sentence, and every example in its guidelines is written text, so text only is the recommended answer. Icon only keeps the wording for screen readers and in the tooltip, but a visitor on a phone never sees it, since there is no hover on a touch screen."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:124
+msgid "whatever surrounds it, a link of this theme, a button of this theme, or colours you choose."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:125
+msgid "nothing of the plugin's goes on the element, which inherits everything from the theme."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:126
+msgid "hands the element the theme's own button classes, so the theme paints it, hover and focus included."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:127
+msgid "reads the link colours out of the theme, which a block theme answers through its theme.json and a classic theme not at all. With no answer the element simply inherits."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:128
+msgid "opens the text, background and hover colours, and the font size in pixels. Each colour has an Inherit box next to it, and ticked it is the theme that decides; an empty font size leaves the size to the theme as well."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:135
+msgid "Both of these are WooCommerce's: without it there is no checkout to print above and no order email to go into, so the two settings are hidden rather than shown doing nothing. What you had configured is kept and comes back the day WooCommerce does."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:136
+msgid "shows it above the place-order button of the classic checkout, and under the form when the shop uses the Checkout block, where it is outside the React root and survives. The Commission's guidelines ask for the checkout page, prominently, not a precise spot."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:137
+msgid "a sentence that opens the notice on the first click, as the Commission's guidelines illustrate, or the whole notice with nothing to click. Part of the German doctrine reads the law as asking for the second at the checkout; if you sell in Germany or Austria, or prefer to be on the safe side, choose it. The image links to itself, so it can be opened at full size from a narrow column."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:138
+msgid "includes the notice in the emails the customer receives, as an image, since an email client cannot open a modal, and attaches the Commission's official PDF in the customer's language. Your own copies of the emails are left alone."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:139
+msgid "leaves the notice out of purchases made only of virtual products, since its legal guarantee covers goods. Applies to the checkout, the cart, the product page, the order email and the invoice. The floating button, the menu and the footer remind the whole shop and stay where they are."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:140
+msgid "leaves a private note on each order saying how and in which language the notice was shown at the checkout, which EU GARAN labels were shown, and the first email that carried the official PDF. It is your proof if a customer or an authority ever asks."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:147
+msgid "Neither is required, since the obligation is met at shop level. They put the notice next to the decision to buy, which is one of the places the Commission's guidelines illustrate. Both are off out of the box."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:148
+msgid "under the add-to-cart button, as the sentence that opens the notice or as the whole notice. It works with classic themes and with block themes."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:149
+msgid "under the cart totals, in the classic cart and after the Cart block."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:156
+msgid "The label of the commercial guarantee of durability a producer can offer: free of charge, for the whole product and for more than two years. The guarantee is the producer's, so the label goes per product, with what the producer gives you; the shop should not go looking for it."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:157
+msgid "EU GARAN tab"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:157
+msgid "in the product data box: the duration in years (more than two, in whole or half years such as 3, 5 or 2,5), the producer and the model identifier, the three editable fields of the label. The label stays off until the three are there. Each variation can set its own and inherits the rest from the product."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:158
+msgid "if the producer gave you the label already filled in, upload it in the same tab and it is shown as it came instead of being drawn."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:159
+msgid "How it is drawn"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:159
+msgid "on the Commission's own template, with only the three fields filled in and in the typeface the guidelines name, Inter. A value too long for its box is printed smaller rather than over the QR code, and the product screen warns you when that happens."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:160
+msgid "on the product page, as the full label or as the nested one that opens it; before the place-order button, nested, one per product; as a line of text in the cart; on the order screen; and in the order email as an image, which needs the GD extension of PHP. Site Health tells you if it is missing."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:167
+msgid "For the invoices of PDF Invoices & Packing Slips for WooCommerce, by WP Overnight. The notice itself already travels as a PDF with the order email; the invoice gets a short reminder of the legal guarantee with the Your Europe link and the national note, and the EU GARAN label of each line in words."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:172
+msgid "Wording and the national note"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:174
+msgid "The notice is the Commission's and cannot be touched. These two texts are yours: the line that opens it and the national note printed beside it."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:175
+msgid "used by every placement, and the title of the modal. Leave it empty for the default wording."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:176
+msgid "the official notice says \"minimum two years\" because that is the European floor and the file may not be edited. Where your own country grants longer, this is how you tell the customer, next to the notice and never inside it."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:177
+msgid "the text of that note. Empty, it states the three years of Article 120.1 TRLGDCU in Spain, the three years of Decree-Law 84/2021 in Portugal or the three years to claim of the Swedish Consumer Sales Act, and it arrives switched on when the shop sells from one of those three countries. The country is read from your WooCommerce base location, never guessed from the language."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:178
+msgid "linked from the national note, and the page the menu item points at. Defaults to the Terms and conditions page of WooCommerce, which is not the same thing as the privacy policy page."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:179
+msgid "creates a published page holding the official notice and your guarantee terms, and selects it here. Uninstalling the plugin never deletes it: it is your content."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:186
+msgid "The official notice is the European summary. What it does not say is what your shop does: how long the guarantee runs here, how a customer claims it and who they write to."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:187
+msgid "your own terms, shown by the [apg_guarantee_terms] shortcode. Leave it empty to use the suggested text, which appears greyed out in the field. Read it before you publish it: it describes what the law already grants, but only you know how your shop handles a claim, and it has no legal value until you have made it yours."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:192
+msgid "Shortcodes and blocks"
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:194
+msgid "For placing the notice somewhere the settings above do not reach. The block editor has the same three as blocks (Legal guarantee notice, Legal guarantee button and Guarantee terms), plus the EU GARAN label block for the product template."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:195
+msgid "the official notice printed in the page, at full size, with the Your Europe link and the national note under it. For a page devoted to the guarantee, where the notice is the content rather than a reminder."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:196
+msgid "your guarantee terms, the text above."
+msgstr ""
+
+#: includes/clases/class-apg-guarantee-help.php:197
+msgid "the button that opens the notice in a modal. Accepts label, class and style, the same three styles as the placements."
+msgstr ""
+
+#: includes/clases/emails.php:74
+#: includes/clases/salida.php:451
+#: includes/clases/salida.php:526
+msgid "Official EU notice on the legal guarantee of conformity"
+msgstr ""
+
+#: includes/clases/facturas.php:69
+msgid "Under EU law the goods you have bought are covered by a legal guarantee of conformity of at least two years from delivery: if they are not in conformity, you are entitled to have them repaired or replaced free of charge, or to a price reduction or a refund."
+msgstr ""
+
+#: includes/clases/facturas.php:112
+#: includes/clases/garan-tienda.php:142
+#: includes/clases/garan-tienda.php:324
+#: includes/clases/garan.php:642
+msgid "Commercial guarantee of durability"
+msgstr ""
+
+#. translators: %s: duration in years, e.g. 5 or 2,5.
+#: includes/clases/garan-tienda.php:162
+#, php-format
+msgid "%s years, EU GARAN label"
+msgstr ""
+
+#. translators: 1: duration in years, e.g. 5 or 2,5. 2: producer.
+#: includes/clases/garan-tienda.php:166
+#, php-format
+msgid "%1$s years from %2$s, EU GARAN label"
+msgstr ""
+
+#: includes/clases/garan-tienda.php:215
+#: includes/clases/garan-tienda.php:357
+msgid "Commercial guarantee of durability offered by the producer"
+msgstr ""
+
+#. translators: %s: duration in years, e.g. 5 or 2,5.
+#: includes/clases/garan.php:564
+#, php-format
+msgid "EU GARAN label: commercial guarantee of durability of %s years offered by the producer"
+msgstr ""
+
+#. translators: 1: duration in years, e.g. 5 or 2,5. 2: producer. 3: model identifier.
+#: includes/clases/garan.php:571
+#, php-format
+msgid "EU GARAN label: commercial guarantee of durability of %1$s years offered by %2$s for model %3$s"
+msgstr ""
+
+#: includes/clases/garan.php:584
+msgid "What the commercial guarantee of durability covers"
+msgstr ""
+
+#: includes/clases/garan.php:609
+#: includes/clases/garan.php:650
+#: includes/clases/salida.php:459
+#: includes/clases/salida.php:535
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: includes/clases/garan.php:643
+#: includes/clases/salida.php:446
+msgid "Close"
+msgstr ""
+
+#: includes/clases/registro.php:37
+msgid "the checkout placement is switched off"
+msgstr ""
+
+#: includes/clases/registro.php:41
+msgid "the order has no goods"
+msgstr ""
+
+#: includes/clases/registro.php:45
+msgid "there is no notice file for the language of the visitor"
+msgstr ""
+
+#: includes/clases/registro.php:49
+msgid "the apg_guarantee_show_notice filter hid it"
+msgstr ""
+
+#. translators: 1: two-letter language code, e.g. ES. 2: how it was shown.
+#: includes/clases/registro.php:74
+#, php-format
+msgid "EU legal guarantee notice shown at the checkout, in %1$s: %2$s."
+msgstr ""
+
+#: includes/clases/registro.php:77
+msgid "the whole notice, on the page"
+msgstr ""
+
+#: includes/clases/registro.php:78
+msgid "a sentence that opens it on the first click"
+msgstr ""
+
+#. translators: %s: reason, e.g. "the order has no goods".
+#: includes/clases/registro.php:85
+#, php-format
+msgid "EU legal guarantee notice not shown at the checkout: %s."
+msgstr ""
+
+#. translators: 1: product name. 2: the guarantee in one line, e.g. "5 years from Acme, EU GARAN label".
+#: includes/clases/registro.php:95
+#, php-format
+msgid "EU GARAN label shown for %1$s: %2$s."
+msgstr ""
+
+#. translators: 1: two-letter language code, e.g. ES. 2: email title, e.g. "Processing order".
+#: includes/clases/registro.php:163
+#, php-format
+msgid "Official PDF of the EU legal guarantee notice, in %1$s, attached to the customer email \"%2$s\"."
+msgstr ""
+
+#: includes/clases/salida.php:82
+msgid "Your legal guarantee rights"
+msgstr ""
+
+#: includes/clases/salida.php:179
+msgid "More about your guarantee rights in your country"
+msgstr ""
+
+#: includes/clases/salida.php:493
+msgid "See our terms and conditions"
+msgstr ""
+
+#: includes/clases/salud.php:23
+msgid "EU legal guarantee notice"
+msgstr ""
+
+#: includes/clases/salud.php:54
+msgid "Legal"
+msgstr ""
+
+#: includes/clases/salud.php:73
+msgid "The EU legal guarantee notice is not shown anywhere on the shop"
+msgstr ""
+
+#: includes/clases/salud.php:74
+msgid "Article 22a of Directive 2011/83/EU requires the notice to be displayed at shop level, and every placement of the plugin is switched off. Turn on the floating button, the menu or the footer, or place it yourself with the shortcode or the block."
+msgstr ""
+
+#: includes/clases/salud.php:84
+msgid "The EU legal guarantee notice is not included in the order emails"
+msgstr ""
+
+#: includes/clases/salud.php:85
+msgid "The Commission's guidelines say the notice should also be included in the confirmation email, and that placement is switched off."
+msgstr ""
+
+#: includes/clases/salud.php:92
+msgid "The EU legal guarantee notice is shown on the shop"
+msgstr ""
+
+#: includes/clases/salud.php:93
+msgid "At least one placement shows the official notice at shop level."
+msgstr ""
+
+#: includes/clases/salud.php:107
+msgid "The EU GARAN label cannot be drawn for the order emails"
+msgstr ""
+
+#: includes/clases/salud.php:108
+msgid "Drawing the label as an image for the emails needs the GD extension of PHP with FreeType, and this server does not have it. The web shows the label anyway; the emails name the guarantee in words and link to Your Europe instead. Your hosting provider can enable GD."
+msgstr ""
+
+#: includes/clases/salud.php:116
+msgid "The EU GARAN labels cannot be saved"
+msgstr ""
+
+#: includes/clases/salud.php:117
+msgid "The labels are kept as images in the uploads folder, and WordPress cannot write there."
+msgstr ""
+
+#: includes/clases/salud.php:124
+msgid "The EU GARAN label can be drawn"
+msgstr ""
+
+#: includes/clases/salud.php:125
+msgid "Products with a commercial guarantee of durability show the label on the web and in the order emails."
 msgstr ""
 
 #: includes/cuadro-informacion.php:16
@@ -33,7 +1158,7 @@ msgstr ""
 msgid "Follow us:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:29 includes/cuadro-informacion.php:29 includes/cuadro-informacion.php:29
+#: includes/cuadro-informacion.php:29
 msgid "Follow us on "
 msgstr ""
 
@@ -55,548 +1180,4 @@ msgstr ""
 
 #: includes/cuadro-informacion.php:44
 msgid "Documentation and Support:"
-msgstr ""
-
-#: includes/cuadro-informacion.php:45 includes/admin/datos.php:140
-msgid "Support"
-msgstr ""
-
-#: includes/cuadro-informacion.php:55 includes/admin/datos.php:49
-msgid "Please, rate %s:"
-msgstr ""
-
-#: includes/admin/ajustes.php:19
-msgid "Text only (recommended)"
-msgstr ""
-
-#: includes/admin/ajustes.php:20
-msgid "Icon and text"
-msgstr ""
-
-#: includes/admin/ajustes.php:21
-msgid "Icon only"
-msgstr ""
-
-#: includes/admin/ajustes.php:50
-msgid "Whatever surrounds it (recommended)"
-msgstr ""
-
-#: includes/admin/ajustes.php:51
-msgid "Like a link of this theme"
-msgstr ""
-
-#: includes/admin/ajustes.php:52
-msgid "Like a button of this theme"
-msgstr ""
-
-#: includes/admin/ajustes.php:53
-msgid "Colours I choose"
-msgstr ""
-
-#: includes/admin/ajustes.php:57 includes/admin/ajustes.php:343
-msgid "Text"
-msgstr ""
-
-#: includes/admin/ajustes.php:58
-msgid "Background"
-msgstr ""
-
-#: includes/admin/ajustes.php:59
-msgid "Text on hover"
-msgstr ""
-
-#: includes/admin/ajustes.php:60
-msgid "Background on hover"
-msgstr ""
-
-#: includes/admin/ajustes.php:75
-msgid "Inherit"
-msgstr ""
-
-#: includes/admin/ajustes.php:79
-msgid "Font size, in pixels"
-msgstr ""
-
-#: includes/admin/ajustes.php:80
-msgid "Theme"
-msgstr ""
-
-#: includes/admin/ajustes.php:93
-msgid "You do not have permission to access this page."
-msgstr ""
-
-#: includes/admin/ajustes.php:101
-msgid "APG Legal Guarantee Notice Options."
-msgstr ""
-
-#: includes/admin/ajustes.php:104
-msgid "Article 22a of Directive 2011/83/EU has required every shop selling goods to display the official EU notice on the legal guarantee of conformity since 27 September 2026. The plugin ships the notice exactly as the European Commission publishes it, in the 24 official EU languages, and serves the one that matches each visitor."
-msgstr ""
-
-#: includes/admin/ajustes.php:121
-msgid "Right now this screen would show the notice in: %s."
-msgstr ""
-
-#: includes/admin/ajustes.php:130
-msgid "Preview it"
-msgstr ""
-
-#: includes/admin/ajustes.php:141
-msgid "Floating button"
-msgstr ""
-
-#: includes/admin/ajustes.php:142
-msgid "Floats over the page wherever you choose, on every page of the shop. On its own this satisfies the obligation: the Commission describes the notice as a general reminder placed on the seller's website, at shop level rather than per product."
-msgstr ""
-
-#: includes/admin/ajustes.php:145
-msgid "Position"
-msgstr ""
-
-#: includes/admin/ajustes.php:148
-msgid "— Do not show it —"
-msgstr ""
-
-#: includes/admin/ajustes.php:151
-msgid "Top left"
-msgstr ""
-
-#: includes/admin/ajustes.php:152
-msgid "Top right"
-msgstr ""
-
-#: includes/admin/ajustes.php:153
-msgid "Middle left"
-msgstr ""
-
-#: includes/admin/ajustes.php:154
-msgid "Middle right"
-msgstr ""
-
-#: includes/admin/ajustes.php:155
-msgid "Bottom left"
-msgstr ""
-
-#: includes/admin/ajustes.php:156
-msgid "Bottom right"
-msgstr ""
-
-#: includes/admin/ajustes.php:166 includes/admin/ajustes.php:211 includes/admin/ajustes.php:234 includes/admin/ajustes.php:256
-msgid "How it looks"
-msgstr ""
-
-#: includes/admin/ajustes.php:168 includes/admin/ajustes.php:213 includes/admin/ajustes.php:236 includes/admin/ajustes.php:258
-msgid "Shows"
-msgstr ""
-
-#: includes/admin/ajustes.php:170 includes/admin/ajustes.php:215 includes/admin/ajustes.php:238 includes/admin/ajustes.php:260
-msgid "Takes its colours from"
-msgstr ""
-
-#: includes/admin/ajustes.php:176
-msgid "Menu"
-msgstr ""
-
-#: includes/admin/ajustes.php:179
-msgid "Add it to"
-msgstr ""
-
-#: includes/admin/ajustes.php:184
-msgid "— Do not add it —"
-msgstr ""
-
-#: includes/admin/ajustes.php:189
-msgid "Added as the last item of that menu, wherever the theme prints it."
-msgstr ""
-
-#: includes/admin/ajustes.php:195
-msgid "It is an ordinary link to \"%s\", so your theme styles it exactly like the rest of the menu."
-msgstr ""
-
-#: includes/admin/ajustes.php:202
-msgid "With no page chosen below, the item opens the notice in the modal instead of linking anywhere. Choosing or creating a page turns it into an ordinary menu link, which is what a theme knows how to style."
-msgstr ""
-
-#: includes/admin/ajustes.php:206
-msgid "This site has no menus yet."
-msgstr ""
-
-#: includes/admin/ajustes.php:217
-msgid "Left on the first option the item is indistinguishable from the rest of the menu, which is usually what you want here."
-msgstr ""
-
-#: includes/admin/ajustes.php:222
-msgid "Site footer"
-msgstr ""
-
-#: includes/admin/ajustes.php:225
-msgid "Show it"
-msgstr ""
-
-#: includes/admin/ajustes.php:229
-msgid "Add it to the footer of every page"
-msgstr ""
-
-#: includes/admin/ajustes.php:244
-msgid "Checkout and emails"
-msgstr ""
-
-#: includes/admin/ajustes.php:247
-msgid "Checkout"
-msgstr ""
-
-#: includes/admin/ajustes.php:251
-msgid "Show it above the place-order button"
-msgstr ""
-
-#: includes/admin/ajustes.php:265
-msgid "Order email"
-msgstr ""
-
-#: includes/admin/ajustes.php:269
-msgid "Include the notice in the customer order emails"
-msgstr ""
-
-#: includes/admin/ajustes.php:271
-msgid "The notice goes in as an image, since an email client cannot open a modal. The Commission's guidelines ask for it here too."
-msgstr ""
-
-#: includes/admin/ajustes.php:276 includes/admin/ajustes.php:308
-msgid "Wording"
-msgstr ""
-
-#: includes/admin/ajustes.php:280
-msgid "Wording that opens it"
-msgstr ""
-
-#: includes/admin/ajustes.php:285
-msgid "Used by every placement. The notice opens on the first click on it, which is the pattern the Commission illustrates. Leave it empty for the default wording."
-msgstr ""
-
-#: includes/admin/ajustes.php:288
-msgid "The Commission's guidelines describe this as \"a sentence informing consumers about their legal guarantee rights\", and every example they give is written text. They do provide a compact graphic for the GARAN label, and deliberately none for this notice. Icon only keeps the wording for screen readers and in the tooltip, but a visitor on a phone never sees it, since there is no hover on a touch screen."
-msgstr ""
-
-#: includes/admin/ajustes.php:294
-msgid "National note"
-msgstr ""
-
-#: includes/admin/ajustes.php:295
-msgid "The official notice says \"minimum two years\" because that is the European floor, and the file may not be edited. Where your country grants longer, tell the customer beside the notice."
-msgstr ""
-
-#: includes/admin/ajustes.php:298
-msgid "Show the note"
-msgstr ""
-
-#: includes/admin/ajustes.php:302
-msgid "Show a national note next to the notice"
-msgstr ""
-
-#: includes/admin/ajustes.php:312
-msgid "Leave it empty for the default, which states the three years Article 120.1 TRLGDCU grants in Spain."
-msgstr ""
-
-#: includes/admin/ajustes.php:317
-msgid "Terms and conditions page"
-msgstr ""
-
-#: includes/admin/ajustes.php:327
-msgid "— None —"
-msgstr ""
-
-#: includes/admin/ajustes.php:332
-msgid "Linked from the national note, and the page the menu item points at. Defaults to the Terms and conditions page of WooCommerce, which is not the same thing as the privacy policy page."
-msgstr ""
-
-#: includes/admin/ajustes.php:338
-msgid "Your guarantee terms"
-msgstr ""
-
-#: includes/admin/ajustes.php:339
-msgid "The official notice is the European summary and cannot be edited. What it does not say is what your shop does: how long the guarantee runs here, how a customer claims it and who they write to. That text is yours, and the plugin only gives you a starting point for it."
-msgstr ""
-
-#: includes/admin/ajustes.php:351
-msgid "Shown by the %s shortcode. Leave it empty to use the suggested text, which appears greyed out above."
-msgstr ""
-
-#: includes/admin/ajustes.php:357
-msgid "Read it before you publish it."
-msgstr ""
-
-#: includes/admin/ajustes.php:358
-msgid "It describes what the law already grants, but only you know how your shop handles a claim, and the text has no legal value until you have made it yours."
-msgstr ""
-
-#: includes/admin/ajustes.php:364
-msgid "Shortcodes"
-msgstr ""
-
-#: includes/admin/ajustes.php:368
-msgid "The official notice printed in the page, at full size. For a page devoted to the guarantee, where the notice is the content rather than a reminder."
-msgstr ""
-
-#: includes/admin/ajustes.php:372
-msgid "Your guarantee terms, the text above."
-msgstr ""
-
-#: includes/admin/ajustes.php:376
-msgid "The button that opens the notice in a modal, for placing it somewhere the settings above do not reach."
-msgstr ""
-
-#: includes/admin/datos.php:26
-msgid "APG Legal Guarantee Notice"
-msgstr ""
-
-#: includes/admin/datos.php:63
-msgid "Unknown rating"
-msgstr ""
-
-#: includes/admin/datos.php:141
-msgid "Donate"
-msgstr ""
-
-#: includes/admin/funciones-apg.php:96
-msgid "In Spain the legal guarantee on new goods is three years from delivery, longer than the two-year European minimum stated in the notice."
-msgstr ""
-
-#: includes/admin/funciones-apg.php:113
-msgid "Every item we sell is covered by the legal guarantee of conformity. If what you receive does not match its description, or does not work as it should, you are entitled to have it repaired or replaced free of charge, and where that is not possible, to a price reduction or a refund."
-msgstr ""
-
-#: includes/admin/funciones-apg.php:117
-msgid "The guarantee runs for three years from delivery on new goods, as Article 120.1 of the Spanish consumer act establishes. On second-hand goods the period is the one agreed at the time of sale, and never less than one year."
-msgstr ""
-
-#: includes/admin/funciones-apg.php:119
-msgid "The guarantee runs for at least two years from delivery. On second-hand goods the period may be shorter, and never less than one year."
-msgstr ""
-
-#: includes/admin/funciones-apg.php:122
-msgid "To claim it, write to us with your order number and a description of the problem, along with proof of purchase such as the receipt, the invoice or a bank statement. We will tell you how to proceed and cover the cost of returning the item when it has to come back to us."
-msgstr ""
-
-#: includes/admin/funciones-apg.php:123
-msgid "This legal guarantee applies on top of any commercial guarantee offered by us or by the producer, and is never replaced by it."
-msgstr ""
-
-#: includes/admin/pagina.php:36
-msgid "Create the page"
-msgstr ""
-
-#: includes/admin/pagina.php:38
-msgid "Creates a published page holding the official notice and your guarantee terms, and selects it here."
-msgstr ""
-
-#: includes/admin/pagina.php:53
-msgid "Security check failed."
-msgstr ""
-
-#: includes/admin/pagina.php:57
-msgid "You do not have permission to create this page."
-msgstr ""
-
-#: includes/admin/pagina.php:137
-msgid "The page could not be created."
-msgstr ""
-
-#: includes/admin/pagina.php:145
-msgid "The page has been created and selected as your terms and conditions page."
-msgstr ""
-
-#: includes/admin/pagina.php:147
-msgid "Edit it"
-msgstr ""
-
-#: includes/admin/pagina.php:149
-msgid "See it"
-msgstr ""
-
-#: includes/admin/pagina.php:204
-msgid "The legal guarantee notice is not being shown anywhere."
-msgstr ""
-
-#: includes/admin/pagina.php:205
-msgid "Article 22a requires it to be displayed at shop level. Turn on the floating button, the menu or the footer, or place it yourself with the shortcode."
-msgstr ""
-
-#: includes/admin/pagina.php:209
-msgid "Open the settings"
-msgstr ""
-
-#: includes/clases/emails.php:58 includes/clases/salida.php:262 includes/clases/salida.php:345
-msgid "Official EU notice on the legal guarantee of conformity"
-msgstr ""
-
-#: includes/clases/emails.php:60 includes/clases/salida.php:269 includes/clases/salida.php:352
-msgid "More about your guarantee rights in your country"
-msgstr ""
-
-#: includes/clases/salida.php:54
-msgid "Your legal guarantee rights"
-msgstr ""
-
-#: includes/clases/salida.php:257
-msgid "Close"
-msgstr ""
-
-#: includes/clases/salida.php:270 includes/clases/salida.php:353
-msgid "(opens in a new tab)"
-msgstr ""
-
-#: includes/clases/salida.php:309
-msgid "See our terms and conditions"
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "More help"
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "Full documentation"
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "The notice"
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "Article 22a of Directive 2011/83/EU has required every shop selling goods to consumers to display the official EU notice on the legal guarantee of conformity since 27 September 2026. Commission Implementing Regulation (EU) 2025/1960 fixes its design and its content."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "There is nothing to write and nothing to design here: the plugin ships the Commission's own files, in the 24 official EU languages, and serves them untouched. The notice cannot be edited, cropped or redrawn, and the plugin will not let you."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "The language follows the visitor"
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "not the site. A shop read in German serves the German notice. Catalan, Basque and Galician fall back on the Spanish notice rather than the English one."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "opens the very notice a visitor would see right now, in the language named beside it."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "It opens on the first click"
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "in a modal, the pattern the Commission's guidelines illustrate, built with the browser's own popover API and no JavaScript at all."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "Where it is shown"
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "The obligation is to display the notice at shop level, so one placement reaching every page is enough. Switch them all off and the plugin warns you on the dashboard, because then the notice is not reaching anybody."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "floats over every page of the shop, in any of six positions. On out of the box, at the bottom right, and on its own it satisfies the obligation."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "added as the last item of the menu you choose. With a page chosen below it is an ordinary link, which is what a theme knows how to style; with no page it opens the modal instead."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "adds it to the footer of every page, wherever your theme prints the footer."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "Every placement carries its own appearance, so the floating button can shout and the menu item can be indistinguishable from the rest of the menu. Out of the box nothing is imposed at all, which is what keeps the notice readable on a dark theme."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "text, icon and text, or icon only. The Commission describes the notice as a sentence, and every example in its guidelines is written text, so text only is the recommended answer. Icon only keeps the wording for screen readers and in the tooltip, but a visitor on a phone never sees it, since there is no hover on a touch screen."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "whatever surrounds it, a link of this theme, a button of this theme, or colours you choose."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "nothing of the plugin's goes on the element, which inherits everything from the theme."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "hands the element the theme's own button classes, so the theme paints it, hover and focus included."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "reads the link colours out of the theme, which a block theme answers through its theme.json and a classic theme not at all. With no answer the element simply inherits."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "opens the text, background and hover colours, and the font size in pixels. Each colour has an Inherit box next to it, and ticked it is the theme that decides; an empty font size leaves the size to the theme as well."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "Both of these are WooCommerce's: without it there is no checkout to print above and no order email to go into, so the two settings are hidden rather than shown doing nothing. What you had configured is kept and comes back the day WooCommerce does."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "shows it above the place-order button of the classic checkout, and under the form when the shop uses the Checkout block, where it is outside the React root and survives. The Commission's guidelines ask for the checkout page, prominently, not a precise spot."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "includes the notice in the emails the customer receives, as an image, since an email client cannot open a modal, and attaches the Commission's official PDF in the customer's language. Your own copies of the emails are left alone."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "Wording and the national note"
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "The notice is the Commission's and cannot be touched. These two texts are yours: the line that opens it and the national note printed beside it."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "used by every placement, and the title of the modal. Leave it empty for the default wording."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "the official notice says \"minimum two years\" because that is the European floor and the file may not be edited. Where your own country grants longer, this is how you tell the customer, next to the notice and never inside it."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "the text of that note. Empty, it states the three years Article 120.1 TRLGDCU grants in Spain, and it arrives switched on when the shop sells from Spain. The country is read from your WooCommerce base location, never guessed from the language."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "linked from the national note, and the page the menu item points at. Defaults to the Terms and conditions page of WooCommerce, which is not the same thing as the privacy policy page."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "creates a published page holding the official notice and your guarantee terms, and selects it here. Uninstalling the plugin never deletes it: it is your content."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "The official notice is the European summary. What it does not say is what your shop does: how long the guarantee runs here, how a customer claims it and who they write to."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "your own terms, shown by the [apg_guarantee_terms] shortcode. Leave it empty to use the suggested text, which appears greyed out in the field. Read it before you publish it: it describes what the law already grants, but only you know how your shop handles a claim, and it has no legal value until you have made it yours."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "For placing the notice somewhere the settings above do not reach."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "the official notice printed in the page, at full size, with the Your Europe link and the national note under it. For a page devoted to the guarantee, where the notice is the content rather than a reminder."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "your guarantee terms, the text above."
-msgstr ""
-
-#: includes/clases/class-apg-guarantee-help.php
-msgid "the button that opens the notice in a modal. Accepts label, class and style, the same three styles as the placements."
 msgstr ""

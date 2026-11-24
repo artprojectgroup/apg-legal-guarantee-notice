@@ -42,6 +42,10 @@ function apg_guarantee_email_notice( $order, $sent_to_admin = false, $plain_text
 	$order      = $order instanceof WC_Order ? $order : null;
 	$plain_text = (bool) $plain_text;
 
+	if ( $order && apg_guarantee_no_goods( 'email', $order ) ) {
+		return;
+	}
+
 	if ( ! apg_guarantee_show_notice( 'email', $order ) ) {
 		apg_guarantee_notice_hidden( 'email', $order, $plain_text );
 
@@ -113,6 +117,10 @@ function apg_guarantee_email_attachment( $adjuntos, $id, $objeto = null, $correo
 
 	$order = $objeto instanceof WC_Order ? $objeto : null;
 
+	if ( $order && apg_guarantee_no_goods( 'email_attachment', $order ) ) {
+		return $adjuntos;
+	}
+
 	if ( ! apg_guarantee_show_notice( 'email_attachment', $order ) ) {
 		return $adjuntos;
 	}
@@ -132,6 +140,10 @@ function apg_guarantee_email_attachment( $adjuntos, $id, $objeto = null, $correo
 	}
 
 	$adjuntos[] = $pdf;
+
+	if ( $order && function_exists( 'apg_guarantee_pdf_pending' ) ) {
+		apg_guarantee_pdf_pending( $order->get_id(), $id );
+	}
 
 	return $adjuntos;
 }

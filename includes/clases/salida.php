@@ -116,10 +116,11 @@ function apg_guarantee_available() {
  * (a role, a user meta, a VAT number on the order). So the plugin does not
  * guess; it asks, once per placement, and whoever knows the shop answers.
  *
- * Contexts: `checkout`, `email`, `email_attachment`, `float`, `footer`, `menu`
- * and `shortcode`. Only the email contexts have an order; everywhere else the
- * visitor is whoever `get_current_user_id()` says, and a full-page cache will
- * serve every anonymous visitor the same page.
+ * Contexts: `cart`, `checkout`, `email`, `email_attachment`, `float`, `footer`,
+ * `invoice`, `menu`, `product` and `shortcode`. Only the email and invoice
+ * contexts have an order; everywhere else the visitor is whoever
+ * `get_current_user_id()` says, and a full-page cache will serve every
+ * anonymous visitor the same page.
  *
  * @param string        $context Placement being rendered.
  * @param WC_Order|null $order   Order the placement is about, when there is one.
@@ -496,6 +497,68 @@ function apg_guarantee_print_national_note( $settings, $context = 'panel' ) {
 }
 
 /**
+ * Prints the whole notice in the page, with nothing to click.
+ *
+ * The image links to itself, so a customer on a narrow column can open it at
+ * full size: the guidelines ask for the notice to be legible at the default
+ * display size, and a checkout sidebar is not always wide enough for that.
+ *
+ * @param string $context     Placement being rendered.
+ * @param string $extra_class Extra class for the wrapper.
+ * @return void
+ */
+function apg_guarantee_print_inline_notice( $context, $extra_class = '' ) {
+	if ( ! apg_guarantee_available() ) {
+		return;
+	}
+
+	wp_enqueue_style( 'apg-legal-guarantee-notice' );
+
+	$settings = apg_guarantee_get_settings();
+	$language = apg_guarantee_current_language();
+	$image    = apg_guarantee_notice_url( $language );
+	$classes  = trim( 'apg-guarantee-inline apg-guarantee-inline--' . sanitize_html_class( $context ) . ' ' . sanitize_html_class( (string) $extra_class ) );
+	?>
+	<div class="<?php echo esc_attr( $classes ); ?>">
+		<a href="<?php echo esc_url( $image ); ?>" target="_blank" rel="noopener" class="apg-guarantee-inline__zoom">
+			<img
+				src="<?php echo esc_url( $image ); ?>"
+				alt="<?php esc_attr_e( 'Official EU notice on the legal guarantee of conformity', 'apg-legal-guarantee-notice' ); ?>"
+				class="apg-guarantee-notice__image"
+				loading="lazy"
+				decoding="async"
+			>
+		</a>
+		<p class="apg-guarantee-notice__link">
+			<a href="<?php echo esc_url( apg_guarantee_your_europe_url( $language ) ); ?>" target="_blank" rel="noopener">
+				<?php echo esc_html( apg_guarantee_your_europe_link_text( $context ) ); ?>
+				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'apg-legal-guarantee-notice' ); ?></span>
+			</a>
+		</p>
+		<?php apg_guarantee_print_national_note( $settings, $context ); ?>
+	</div>
+	<?php
+}
+
+/**
+ * Prints the notice for a placement tied to a purchase, in the way the
+ * merchant chose for it: the sentence that opens it, or the notice itself.
+ *
+ * @param string $placement `checkout`, `product` or `cart`.
+ * @param string $mode      `link` or `full`.
+ * @return void
+ */
+function apg_guarantee_print_placement( $placement, $mode ) {
+	if ( 'full' === $mode ) {
+		apg_guarantee_print_inline_notice( $placement );
+
+		return;
+	}
+
+	apg_guarantee_print_trigger( apg_guarantee_placement_args( $placement ) );
+}
+
+/**
  * Shortcode `[apg_guarantee_notice]`: the official notice printed in the page.
  *
  * The placements on the shop open the notice in a modal, which is the right
@@ -522,32 +585,11 @@ function apg_guarantee_notice_shortcode( $atts ) {
 		return (string) ob_get_clean();
 	}
 
-	wp_enqueue_style( 'apg-legal-guarantee-notice' );
-
-	$settings = apg_guarantee_get_settings();
-	$language = apg_guarantee_current_language();
-	$classes  = trim( 'apg-guarantee-inline ' . sanitize_html_class( (string) $atts['class'] ) );
-
 	/** This action is documented in includes/clases/checkout.php */
 	do_action( 'apg_guarantee_before_notice', 'shortcode', null, false );
-	?>
-	<div class="<?php echo esc_attr( $classes ); ?>">
-		<img
-			src="<?php echo esc_url( apg_guarantee_notice_url( $language ) ); ?>"
-			alt="<?php esc_attr_e( 'Official EU notice on the legal guarantee of conformity', 'apg-legal-guarantee-notice' ); ?>"
-			class="apg-guarantee-notice__image"
-			loading="lazy"
-			decoding="async"
-		>
-		<p class="apg-guarantee-notice__link">
-			<a href="<?php echo esc_url( apg_guarantee_your_europe_url( $language ) ); ?>" target="_blank" rel="noopener">
-				<?php echo esc_html( apg_guarantee_your_europe_link_text( 'shortcode' ) ); ?>
-				<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'apg-legal-guarantee-notice' ); ?></span>
-			</a>
-		</p>
-		<?php apg_guarantee_print_national_note( $settings, 'shortcode' ); ?>
-	</div>
-	<?php
+
+	apg_guarantee_print_inline_notice( 'shortcode', (string) $atts['class'] );
+
 	/** This action is documented in includes/clases/checkout.php */
 	do_action( 'apg_guarantee_after_notice', 'shortcode', null, false );
 

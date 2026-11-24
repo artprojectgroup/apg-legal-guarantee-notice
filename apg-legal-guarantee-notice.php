@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: APG Legal Guarantee Notice
-Version: 0.4.1
+Version: 0.5.0
 Plugin URI: https://artprojectgroup.es/plugins-para-wordpress/apg-aviso-de-garantia-legal
 Description: Shows the official EU harmonised notice on the legal guarantee of conformity, as Article 22a of Directive 2011/83/EU requires since 27 September 2026.
 Author URI: https://artprojectgroup.es/
@@ -9,10 +9,9 @@ Author: Art Project Group
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 6.0
-Tested up to: 7.2
 Requires PHP: 7.4
 WC requires at least: 7.0
-WC tested up to: 11.2.1
+WC tested up to: 11.3.1
 Text Domain: apg-legal-guarantee-notice
 Domain Path: /languages
 
@@ -23,7 +22,7 @@ Domain Path: /languages
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'apg_guarantee_VERSION', '0.4.1' );
+define( 'apg_guarantee_VERSION', '0.5.0' );
 define( 'apg_guarantee_DIRECCION', __FILE__ );
 
 /**
@@ -74,10 +73,19 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/clases/aviso.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/clases/tema.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/clases/servidor.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/clases/salida.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/clases/bienes.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/clases/garan.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/clases/garan-tienda.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/clases/checkout.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/clases/producto.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/clases/emails.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/clases/registro.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/clases/facturas.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/clases/bloques.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/clases/salud.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/pagina.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin/ajustes.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin/garan-producto.php';
 
 /**
  * Registers the plugin settings.

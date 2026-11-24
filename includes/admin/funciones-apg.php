@@ -22,7 +22,22 @@ defined( 'ABSPATH' ) || exit;
  * @return array<int,string>
  */
 function apg_guarantee_placements() {
-	return array( 'float', 'footer', 'menu', 'checkout' );
+	return array( 'float', 'footer', 'menu', 'checkout', 'product', 'cart' );
+}
+
+/**
+ * How the notice can be shown where it is tied to a purchase.
+ *
+ * `link` is the sentence that opens the notice on the first click, the pattern
+ * the Commission's guidelines illustrate. `full` prints the whole notice where
+ * the sentence would be, with nothing to click. The guidelines allow the first;
+ * part of the German doctrine reads Article 246a EGBGB as asking for the second
+ * at the checkout, so the merchant chooses.
+ *
+ * @return array<int,string>
+ */
+function apg_guarantee_display_modes() {
+	return array( 'link', 'full' );
 }
 
 /**
@@ -43,7 +58,16 @@ function apg_guarantee_get_settings() {
 		'footer_enabled'     => '0',
 		'menu_id'            => '0',
 		'checkout_enabled'   => '1',
+		// The link keeps the checkout as it was for every shop updating from an
+		// earlier version; the full notice is there for whoever asks for it.
+		'checkout_display'   => 'link',
+		'product_display'    => 'off',
+		'cart_display'       => 'off',
 		'show_email'         => '1',
+		'goods_only'         => '1',
+		'order_note'         => '1',
+		'garan_product'      => 'label',
+		'invoice_enabled'    => '1',
 		'trigger_text'       => '',
 
 		'national_note'      => apg_guarantee_default_national_note_enabled(),
@@ -98,24 +122,39 @@ function apg_guarantee_shop_country() {
 }
 
 /**
- * Whether the shop sits in a country whose own law grants more than the notice
- * says, and therefore needs the national note beside it.
+ * The countries whose own law gives the consumer more than the notice says.
  *
- * Spain is the only one the plugin knows a divergence for: Article 120.1 TRLGDCU
- * raises the legal guarantee on new goods to three years, where the European
- * notice states the two-year minimum and cannot be edited to say otherwise.
+ * The notice states the two-year European minimum and cannot be edited, so a
+ * shop in one of these countries has to tell the customer the rest beside it:
  *
- * @return bool
+ *  - Spain: three years from delivery on new goods, Article 120.1 TRLGDCU.
+ *  - Portugal: three years from delivery, Article 12 of Decree-Law 84/2021.
+ *  - Sweden: three years from delivery to claim a lack of conformity, under
+ *    the Consumer Sales Act (konsumentköplagen, 2022:260).
+ *
+ * Countries such as Ireland, the Netherlands or Finland tie the period to how
+ * long the goods can be expected to last rather than to a number of years, so
+ * there is no fixed sentence to write for them; the merchant writes their own.
+ *
+ * @return array<int,string> Two-letter ISO country codes.
  */
-function apg_guarantee_national_note_applies() {
+function apg_guarantee_national_note_countries() {
 	/**
 	 * Filters the countries that get the national note beside the notice.
 	 *
 	 * @param array $paises Two-letter ISO country codes.
 	 */
-	$paises = (array) apply_filters( 'apg_guarantee_national_note_countries', array( 'ES' ) );
+	return array_map( 'strtoupper', (array) apply_filters( 'apg_guarantee_national_note_countries', array( 'ES', 'PT', 'SE' ) ) );
+}
 
-	return in_array( apg_guarantee_shop_country(), array_map( 'strtoupper', $paises ), true );
+/**
+ * Whether the shop sits in a country whose own law grants more than the notice
+ * says, and therefore needs the national note beside it.
+ *
+ * @return bool
+ */
+function apg_guarantee_national_note_applies() {
+	return in_array( apg_guarantee_shop_country(), apg_guarantee_national_note_countries(), true );
 }
 
 /**
@@ -167,7 +206,18 @@ function apg_guarantee_default_terms_page() {
  * @return string
  */
 function apg_guarantee_default_national_note() {
-	return __( 'In Spain the legal guarantee on new goods is three years from delivery, longer than the two-year European minimum stated in the notice.', 'apg-legal-guarantee-notice' );
+	switch ( apg_guarantee_shop_country() ) {
+		case 'PT':
+			return __( 'In Portugal the legal guarantee on goods is three years from delivery, longer than the two-year European minimum stated in the notice.', 'apg-legal-guarantee-notice' );
+
+		case 'SE':
+			return __( 'In Sweden you can claim a lack of conformity for three years from delivery, longer than the two-year European minimum stated in the notice.', 'apg-legal-guarantee-notice' );
+
+		default:
+			// Spain, and also the fallback for a country added with the filter:
+			// it is the wording the plugin has always shipped.
+			return __( 'In Spain the legal guarantee on new goods is three years from delivery, longer than the two-year European minimum stated in the notice.', 'apg-legal-guarantee-notice' );
+	}
 }
 
 /**
@@ -184,14 +234,16 @@ function apg_guarantee_default_terms_text() {
 	// Same decision as the national note, and for the same reason: what the
 	// shop owes its customers follows from where the shop is, not from the
 	// language its website happens to be written in.
-	$spanish = apg_guarantee_national_note_applies();
+	$country = apg_guarantee_national_note_applies() ? apg_guarantee_shop_country() : '';
 
 	$lines = array(
 		__( 'Every item we sell is covered by the legal guarantee of conformity. If what you receive does not match its description, or does not work as it should, you are entitled to have it repaired or replaced free of charge, and where that is not possible, to a price reduction or a refund.', 'apg-legal-guarantee-notice' ),
 	);
 
-	if ( $spanish ) {
+	if ( 'ES' === $country ) {
 		$lines[] = __( 'The guarantee runs for three years from delivery on new goods, as Article 120.1 of the Spanish consumer act establishes. On second-hand goods the period is the one agreed at the time of sale, and never less than one year.', 'apg-legal-guarantee-notice' );
+	} elseif ( '' !== $country ) {
+		$lines[] = __( 'You can claim the guarantee for three years from delivery, as the consumer law of this country establishes. On second-hand goods the period may be shorter where the law allows it.', 'apg-legal-guarantee-notice' );
 	} else {
 		$lines[] = __( 'The guarantee runs for at least two years from delivery. On second-hand goods the period may be shorter, and never less than one year.', 'apg-legal-guarantee-notice' );
 	}
@@ -262,10 +314,12 @@ function apg_guarantee_placement_args( $placement ) {
  * @return array<int,string>
  */
 function apg_guarantee_claves_woocommerce() {
-	$claves = array( 'checkout_enabled', 'show_email' );
+	$claves = array( 'checkout_enabled', 'checkout_display', 'product_display', 'cart_display', 'show_email', 'goods_only', 'order_note', 'garan_product', 'invoice_enabled' );
 
-	foreach ( array( '_style', '_look', '_color', '_background', '_color_hover', '_background_hover', '_font_size' ) as $sufijo ) {
-		$claves[] = 'checkout' . $sufijo;
+	foreach ( array( 'checkout', 'product', 'cart' ) as $placement ) {
+		foreach ( array( '_style', '_look', '_color', '_background', '_color_hover', '_background_hover', '_font_size' ) as $sufijo ) {
+			$claves[] = $placement . $sufijo;
+		}
 	}
 
 	return $claves;
@@ -324,6 +378,20 @@ function apg_guarantee_sanitiza_opciones( $options ) {
 	$clean['checkout_enabled'] = ! empty( $options['checkout_enabled'] ) ? '1' : '0';
 	$clean['show_email']       = ! empty( $options['show_email'] ) ? '1' : '0';
 	$clean['national_note']    = ! empty( $options['national_note'] ) ? '1' : '0';
+	$clean['goods_only']       = ! empty( $options['goods_only'] ) ? '1' : '0';
+	$clean['order_note']       = ! empty( $options['order_note'] ) ? '1' : '0';
+	$clean['invoice_enabled']  = ! empty( $options['invoice_enabled'] ) ? '1' : '0';
+
+	$display                   = isset( $options['checkout_display'] ) ? sanitize_key( $options['checkout_display'] ) : 'link';
+	$clean['checkout_display'] = in_array( $display, apg_guarantee_display_modes(), true ) ? $display : 'link';
+
+	foreach ( array( 'product', 'cart' ) as $placement ) {
+		$display                           = isset( $options[ $placement . '_display' ] ) ? sanitize_key( $options[ $placement . '_display' ] ) : 'off';
+		$clean[ $placement . '_display' ] = in_array( $display, apg_guarantee_display_modes(), true ) ? $display : 'off';
+	}
+
+	$garan                  = isset( $options['garan_product'] ) ? sanitize_key( $options['garan_product'] ) : 'label';
+	$clean['garan_product'] = in_array( $garan, array( 'label', 'nested' ), true ) ? $garan : 'label';
 
 	$clean['menu_id']            = isset( $options['menu_id'] ) ? (string) absint( $options['menu_id'] ) : '0';
 	$clean['trigger_text']       = isset( $options['trigger_text'] ) ? sanitize_text_field( $options['trigger_text'] ) : '';

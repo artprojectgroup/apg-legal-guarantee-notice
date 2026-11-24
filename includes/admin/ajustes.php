@@ -34,6 +34,35 @@ function apg_guarantee_field_style( $placement, $settings ) {
 }
 
 /**
+ * Prints the choice of how the notice is shown where it is tied to a purchase.
+ *
+ * @param string $placement `checkout`, `product` or `cart`.
+ * @param array  $settings  Plugin settings.
+ * @param bool   $can_hide  Whether "do not show it" is one of the choices.
+ * @return void
+ */
+function apg_guarantee_field_display( $placement, $settings, $can_hide ) {
+	$current = isset( $settings[ $placement . '_display' ] ) ? (string) $settings[ $placement . '_display' ] : 'link';
+	$choices = array();
+
+	if ( $can_hide ) {
+		$choices['off'] = __( 'Do not show it', 'apg-legal-guarantee-notice' );
+	}
+
+	$choices['link'] = __( 'A sentence that opens it on the first click', 'apg-legal-guarantee-notice' );
+	$choices['full'] = __( 'The whole notice, with nothing to click', 'apg-legal-guarantee-notice' );
+
+	foreach ( $choices as $key => $label ) :
+		?>
+		<label class="apg-guarantee-radio">
+			<input type="radio" name="apg_guarantee_settings[<?php echo esc_attr( $placement ); ?>_display]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $key, $current ); ?>>
+			<?php echo esc_html( $label ); ?>
+		</label>
+		<?php
+	endforeach;
+}
+
+/**
  * Prints the colour and size fields for one placement.
  *
  * @param string $placement Placement key.
@@ -262,12 +291,20 @@ function apg_guarantee_pantalla_ajustes() {
 					</td>
 				</tr>
 				<tr>
+					<th scope="row"><?php esc_html_e( 'How it is shown', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<?php apg_guarantee_field_display( 'checkout', $settings, false ); ?>
+						<p class="description"><?php esc_html_e( 'The Commission\'s guidelines illustrate the sentence that opens the notice. Part of the German doctrine reads the law as asking for the whole notice at the checkout, with nothing to click; if you sell in Germany or Austria, or prefer to be on the safe side, choose the whole notice.', 'apg-legal-guarantee-notice' ); ?></p>
+					</td>
+				</tr>
+				<tr>
 					<th scope="row"><?php esc_html_e( 'How it looks', 'apg-legal-guarantee-notice' ); ?></th>
 					<td>
 						<p class="apg-guarantee-sublabel"><?php esc_html_e( 'Shows', 'apg-legal-guarantee-notice' ); ?></p>
 						<?php apg_guarantee_field_style( 'checkout', $settings ); ?>
 						<p class="apg-guarantee-sublabel"><?php esc_html_e( 'Takes its colours from', 'apg-legal-guarantee-notice' ); ?></p>
 						<?php apg_guarantee_field_appearance( 'checkout', $settings ); ?>
+						<p class="description"><?php esc_html_e( 'For the sentence; the whole notice is the Commission\'s image and has no look of its own.', 'apg-legal-guarantee-notice' ); ?></p>
 					</td>
 				</tr>
 				<tr>
@@ -278,6 +315,105 @@ function apg_guarantee_pantalla_ajustes() {
 							<?php esc_html_e( 'Include the notice in the customer order emails', 'apg-legal-guarantee-notice' ); ?>
 						</label>
 						<p class="description"><?php esc_html_e( 'The notice goes in as an image, since an email client cannot open a modal. The Commission\'s guidelines ask for it here too.', 'apg-legal-guarantee-notice' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Only with goods', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<label>
+							<input type="checkbox" name="apg_guarantee_settings[goods_only]" value="1" <?php checked( '1', (string) $settings['goods_only'] ); ?>>
+							<?php esc_html_e( 'Leave the notice out of purchases made only of virtual products', 'apg-legal-guarantee-notice' ); ?>
+						</label>
+						<p class="description"><?php esc_html_e( 'The legal guarantee of the notice covers goods. A course, a subscription or a download is not one. Applies to the checkout, the cart, the product page, the order email and the invoice; the floating button, the menu and the footer remind the whole shop and stay where they are.', 'apg-legal-guarantee-notice' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Record on the order', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<label>
+							<input type="checkbox" name="apg_guarantee_settings[order_note]" value="1" <?php checked( '1', (string) $settings['order_note'] ); ?>>
+							<?php esc_html_e( 'Leave a private note on each order saying what the customer was shown', 'apg-legal-guarantee-notice' ); ?>
+						</label>
+						<p class="description"><?php esc_html_e( 'How and in which language the notice was shown at the checkout, the EU GARAN labels shown, and the first email that carried the official PDF. It is your proof if a customer or an authority ever asks.', 'apg-legal-guarantee-notice' ); ?></p>
+					</td>
+				</tr>
+			</table>
+
+			<h3><?php esc_html_e( 'Product page and cart', 'apg-legal-guarantee-notice' ); ?></h3>
+			<p><?php esc_html_e( 'Not required: the obligation is met at shop level. They put the notice next to the decision to buy, which is one of the places the Commission\'s guidelines illustrate.', 'apg-legal-guarantee-notice' ); ?></p>
+			<table class="form-table apg-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Product page', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<?php apg_guarantee_field_display( 'product', $settings, true ); ?>
+						<p class="description"><?php esc_html_e( 'Under the add-to-cart button.', 'apg-legal-guarantee-notice' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'How it looks', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<p class="apg-guarantee-sublabel"><?php esc_html_e( 'Shows', 'apg-legal-guarantee-notice' ); ?></p>
+						<?php apg_guarantee_field_style( 'product', $settings ); ?>
+						<p class="apg-guarantee-sublabel"><?php esc_html_e( 'Takes its colours from', 'apg-legal-guarantee-notice' ); ?></p>
+						<?php apg_guarantee_field_appearance( 'product', $settings ); ?>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Cart', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<?php apg_guarantee_field_display( 'cart', $settings, true ); ?>
+						<p class="description"><?php esc_html_e( 'Under the cart totals.', 'apg-legal-guarantee-notice' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'How it looks', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<p class="apg-guarantee-sublabel"><?php esc_html_e( 'Shows', 'apg-legal-guarantee-notice' ); ?></p>
+						<?php apg_guarantee_field_style( 'cart', $settings ); ?>
+						<p class="apg-guarantee-sublabel"><?php esc_html_e( 'Takes its colours from', 'apg-legal-guarantee-notice' ); ?></p>
+						<?php apg_guarantee_field_appearance( 'cart', $settings ); ?>
+					</td>
+				</tr>
+			</table>
+
+			<h3><?php esc_html_e( 'EU GARAN label', 'apg-legal-guarantee-notice' ); ?></h3>
+			<p><?php esc_html_e( 'The label of the commercial guarantee of durability that a producer can offer: free of charge, for the whole product and for more than two years. It is the producer\'s, so it goes per product: fill in the EU GARAN tab of the product with what the producer gives you, and the plugin draws the official label with it. It is shown on the product page, before the place-order button, as a line in the cart and in the order email.', 'apg-legal-guarantee-notice' ); ?></p>
+			<table class="form-table apg-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'On the product page', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<?php
+						$apg_guarantee_garan_modes = array(
+							'label'  => __( 'The full label', 'apg-legal-guarantee-notice' ),
+							'nested' => __( 'The nested label, which opens the full one on the first click', 'apg-legal-guarantee-notice' ),
+						);
+						foreach ( $apg_guarantee_garan_modes as $apg_guarantee_key => $apg_guarantee_label ) :
+							?>
+							<label class="apg-guarantee-radio">
+								<input type="radio" name="apg_guarantee_settings[garan_product]" value="<?php echo esc_attr( $apg_guarantee_key ); ?>" <?php checked( $apg_guarantee_key, (string) $settings['garan_product'] ); ?>>
+								<?php echo esc_html( $apg_guarantee_label ); ?>
+							</label>
+						<?php endforeach; ?>
+						<p class="description"><?php esc_html_e( 'Before the place-order button it is always the nested label, one per product, as the guidelines allow where space is short; in the email it is always the full one.', 'apg-legal-guarantee-notice' ); ?></p>
+					</td>
+				</tr>
+			</table>
+
+			<h3><?php esc_html_e( 'PDF invoices', 'apg-legal-guarantee-notice' ); ?></h3>
+			<table class="form-table apg-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Invoice', 'apg-legal-guarantee-notice' ); ?></th>
+					<td>
+						<label>
+							<input type="checkbox" name="apg_guarantee_settings[invoice_enabled]" value="1" <?php checked( '1', (string) $settings['invoice_enabled'] ); ?>>
+							<?php esc_html_e( 'Add a reminder of the legal guarantee, and the EU GARAN label of each line, to the invoices', 'apg-legal-guarantee-notice' ); ?>
+						</label>
+						<p class="description">
+							<?php esc_html_e( 'For the invoices of PDF Invoices & Packing Slips for WooCommerce, by WP Overnight. The notice itself already travels as a PDF with the order email; the invoice gets a short reminder with the Your Europe link and the national note.', 'apg-legal-guarantee-notice' ); ?>
+							<?php if ( ! function_exists( 'WPO_WCPDF' ) ) : ?>
+								<strong><?php esc_html_e( 'That plugin is not active on this site, so this setting does nothing for now.', 'apg-legal-guarantee-notice' ); ?></strong>
+							<?php endif; ?>
+						</p>
 					</td>
 				</tr>
 			</table>
@@ -320,7 +456,7 @@ function apg_guarantee_pantalla_ajustes() {
 					</th>
 					<td>
 						<textarea class="large-text" rows="3" id="apg_guarantee_national_note_text" name="apg_guarantee_settings[national_note_text]" placeholder="<?php echo esc_attr( apg_guarantee_default_national_note() ); ?>"><?php echo esc_textarea( $settings['national_note_text'] ); ?></textarea>
-						<p class="description"><?php esc_html_e( 'Leave it empty for the default, which states the three years Article 120.1 TRLGDCU grants in Spain.', 'apg-legal-guarantee-notice' ); ?></p>
+						<p class="description"><?php esc_html_e( 'Leave it empty for the default, which depends on the country of your shop: the three years of Article 120.1 TRLGDCU in Spain, the three years of Decree-Law 84/2021 in Portugal, or the three years to claim of the Swedish Consumer Sales Act.', 'apg-legal-guarantee-notice' ); ?></p>
 					</td>
 				</tr>
 				<tr>

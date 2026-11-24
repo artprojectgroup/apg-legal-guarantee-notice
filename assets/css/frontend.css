@@ -312,3 +312,120 @@
 .apg-guarantee-footer {
 	margin: 1.5em 0;
 }
+
+/* ------------------------------------------------- checkout, product and cart */
+
+.apg-guarantee-product,
+.apg-guarantee-cart {
+	margin: 1em 0;
+}
+
+/* The whole notice in a narrow column: as wide as there is room for, and a
+   click away from full size, since it is a link to the image itself. */
+.apg-guarantee-inline--checkout .apg-guarantee-notice__image,
+.apg-guarantee-inline--product .apg-guarantee-notice__image,
+.apg-guarantee-inline--cart .apg-guarantee-notice__image {
+	max-width: 100%;
+}
+
+.apg-guarantee-inline__zoom {
+	display: block;
+}
+
+/* ------------------------------------------------------------ EU GARAN label */
+
+/*
+ * The label is the Commission's artwork and is shown at the size it was drawn,
+ * never larger than the column it sits in. The popover of the nested label
+ * reuses the notice's modal, so it looks and closes the same way.
+ */
+.apg-garan {
+	margin: 1em 0;
+}
+
+.apg-garan__image {
+	display: block;
+	width: 269px;
+	max-width: 100%;
+	height: auto;
+}
+
+.apg-garan__zoom {
+	display: inline-block;
+}
+
+.apg-garan__link {
+	margin: 0.5em 0 0;
+	font-size: 0.9em;
+}
+
+.apg-garan--nested {
+	display: inline-block;
+	margin: 0.25em 0;
+}
+
+.apg-garan__open {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	line-height: 0;
+	cursor: pointer;
+}
+
+.apg-garan__nested {
+	display: block;
+	width: 184px;
+	max-width: 100%;
+	height: auto;
+}
+
+.apg-garan__modal {
+	width: min(92vw, 360px);
+}
+
+.apg-garan__modal .apg-guarantee-notice__head,
+.apg-garan__modal .apg-guarantee-notice__body,
+.apg-garan__modal .apg-guarantee-notice__link {
+	display: block;
+}
+
+.apg-garan__modal .apg-guarantee-notice__head {
+	display: flex;
+}
+
+.apg-garan__modal .apg-garan__image {
+	width: 100%;
+}
+
+.apg-garan-checkout {
+	margin: 1em 0;
+}
+
+.apg-garan-checkout__title {
+	margin: 0 0 0.5em;
+	font-weight: 600;
+}
+
+.apg-garan-checkout__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.apg-garan-checkout__item {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 12px;
+	align-items: center;
+	margin: 0 0 0.5em;
+}
+
+/* Without the popover API the full label would sit open next to each nested
+   one, so the nested ones step aside and the full labels stay. */
+@supports not selector(:popover-open) {
+	.apg-garan__open {
+		display: none;
+	}
+}

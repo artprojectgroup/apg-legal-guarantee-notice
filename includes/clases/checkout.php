@@ -39,7 +39,7 @@ function apg_guarantee_checkout_enabled() {
  * @return void
  */
 function apg_guarantee_checkout_notice() {
-	if ( ! apg_guarantee_checkout_enabled() ) {
+	if ( ! apg_guarantee_checkout_enabled() || apg_guarantee_no_goods( 'checkout' ) ) {
 		return;
 	}
 
@@ -59,8 +59,10 @@ function apg_guarantee_checkout_notice() {
 	 */
 	do_action( 'apg_guarantee_before_notice', 'checkout', null, false );
 
+	$settings = apg_guarantee_get_settings();
+
 	echo '<div class="apg-guarantee-checkout">';
-	apg_guarantee_print_trigger( apg_guarantee_placement_args( 'checkout' ) );
+	apg_guarantee_print_placement( 'checkout', (string) $settings['checkout_display'] );
 	echo '</div>';
 
 	/**
@@ -76,16 +78,18 @@ function apg_guarantee_checkout_notice() {
 add_action( 'woocommerce_review_order_before_submit', 'apg_guarantee_checkout_notice' );
 
 /**
- * Returns the checkout markup, or an empty string when it is switched off.
+ * Returns what goes after the Checkout block: the GARAN labels of the order and
+ * the notice, each only when there is something to show.
  *
  * @return string
  */
 function apg_guarantee_checkout_markup() {
-	if ( ! apg_guarantee_checkout_enabled() ) {
-		return '';
+	ob_start();
+
+	if ( function_exists( 'apg_guarantee_garan_checkout' ) ) {
+		apg_guarantee_garan_checkout();
 	}
 
-	ob_start();
 	apg_guarantee_checkout_notice();
 
 	return (string) ob_get_clean();

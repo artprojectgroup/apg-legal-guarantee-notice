@@ -182,43 +182,22 @@ function apg_guarantee_notice_url( $language ) {
 /**
  * The Your Europe address behind the QR code of the notice, per language.
  *
- * The Commission's practical guidelines require a clickable link to the same
- * destination as the QR code to be available alongside the notice, and list one
- * address per language.
+ * The Commission's practical guidelines require a clickable link "to the same
+ * destination as the QR code" to be available alongside the notice. So the
+ * address is the one the QR code of each official file actually encodes, read
+ * off the files themselves, and not the short aliases listed in the guidelines:
+ * five of those (Finnish, Hungarian, Latvian, Lithuanian and Romanian) end on
+ * the "page not found" of europa.eu.
  *
  * @param string $language Two-letter language code.
  * @return string
  */
 function apg_guarantee_your_europe_url( $language ) {
-	$paths = array(
-		'bg' => 'гаранции',
-		'cs' => 'záruky_cs',
-		'da' => 'garantier',
-		'de' => 'garantien',
-		'el' => 'εγγυήσεις',
-		'en' => 'guarantees',
-		'es' => 'garantías',
-		'et' => 'garantiid',
-		'fi' => 'takuut',
-		'fr' => 'garanties',
-		'ga' => 'ráthaíochtaí',
-		'hr' => 'jamstva_hr',
-		'hu' => 'garanciak',
-		'it' => 'garanzie',
-		'lt' => 'garantijos_lt',
-		'lv' => 'garantijas_lv',
-		'mt' => 'garanziji',
-		'nl' => 'garantie',
-		'pl' => 'gwarancje',
-		'pt' => 'garantias',
-		'ro' => 'garantii',
-		'sk' => 'záruky_sk',
-		'sl' => 'jamstva_sl',
-		'sv' => 'reklamationsratt',
-	);
-
 	$language = strtolower( (string) $language );
-	$path     = isset( $paths[ $language ] ) ? $paths[ $language ] : $paths['en'];
+
+	if ( ! in_array( $language, APG_GUARANTEE_LANGUAGES, true ) ) {
+		$language = 'en';
+	}
 
 	/**
 	 * Filters the Your Europe address the notice links to.
@@ -228,7 +207,7 @@ function apg_guarantee_your_europe_url( $language ) {
 	 */
 	return (string) apply_filters(
 		'apg_guarantee_your_europe_url',
-		'https://europa.eu/youreurope/' . $path,
+		'https://europa.eu/youreurope/citizens/consumers/shopping/guarantees-returns/index_' . $language . '.htm',
 		$language
 	);
 }

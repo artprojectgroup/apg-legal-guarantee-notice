@@ -133,8 +133,38 @@ class APG_Guarantee_Help {
 				'title' => __( 'Checkout and emails', 'apg-legal-guarantee-notice' ),
 				'items' => array(
 					__( 'Both of these are WooCommerce\'s: without it there is no checkout to print above and no order email to go into, so the two settings are hidden rather than shown doing nothing. What you had configured is kept and comes back the day WooCommerce does.', 'apg-legal-guarantee-notice' ),
-					__( 'Checkout', 'apg-legal-guarantee-notice' )    => __( 'shows it above the place-order button of the classic checkout, and under the form when the shop uses the Checkout block, where it is outside the React root and survives. The Commission\'s guidelines ask for the checkout page, prominently, not a precise spot.', 'apg-legal-guarantee-notice' ),
-					__( 'Order email', 'apg-legal-guarantee-notice' ) => __( 'includes the notice in the emails the customer receives, as an image, since an email client cannot open a modal, and attaches the Commission\'s official PDF in the customer\'s language. Your own copies of the emails are left alone.', 'apg-legal-guarantee-notice' ),
+					__( 'Checkout', 'apg-legal-guarantee-notice' )            => __( 'shows it above the place-order button of the classic checkout, and under the form when the shop uses the Checkout block, where it is outside the React root and survives. The Commission\'s guidelines ask for the checkout page, prominently, not a precise spot.', 'apg-legal-guarantee-notice' ),
+					__( 'How it is shown', 'apg-legal-guarantee-notice' )     => __( 'a sentence that opens the notice on the first click, as the Commission\'s guidelines illustrate, or the whole notice with nothing to click. Part of the German doctrine reads the law as asking for the second at the checkout; if you sell in Germany or Austria, or prefer to be on the safe side, choose it. The image links to itself, so it can be opened at full size from a narrow column.', 'apg-legal-guarantee-notice' ),
+					__( 'Order email', 'apg-legal-guarantee-notice' )         => __( 'includes the notice in the emails the customer receives, as an image, since an email client cannot open a modal, and attaches the Commission\'s official PDF in the customer\'s language. Your own copies of the emails are left alone.', 'apg-legal-guarantee-notice' ),
+					__( 'Only with goods', 'apg-legal-guarantee-notice' )     => __( 'leaves the notice out of purchases made only of virtual products, since its legal guarantee covers goods. Applies to the checkout, the cart, the product page, the order email and the invoice. The floating button, the menu and the footer remind the whole shop and stay where they are.', 'apg-legal-guarantee-notice' ),
+					__( 'Record on the order', 'apg-legal-guarantee-notice' ) => __( 'leaves a private note on each order saying how and in which language the notice was shown at the checkout, which EU GARAN labels were shown, and the first email that carried the official PDF. It is your proof if a customer or an authority ever asks.', 'apg-legal-guarantee-notice' ),
+				),
+			),
+
+			'product'   => array(
+				'title' => __( 'Product page and cart', 'apg-legal-guarantee-notice' ),
+				'items' => array(
+					__( 'Neither is required, since the obligation is met at shop level. They put the notice next to the decision to buy, which is one of the places the Commission\'s guidelines illustrate. Both are off out of the box.', 'apg-legal-guarantee-notice' ),
+					__( 'Product page', 'apg-legal-guarantee-notice' ) => __( 'under the add-to-cart button, as the sentence that opens the notice or as the whole notice. It works with classic themes and with block themes.', 'apg-legal-guarantee-notice' ),
+					__( 'Cart', 'apg-legal-guarantee-notice' )         => __( 'under the cart totals, in the classic cart and after the Cart block.', 'apg-legal-guarantee-notice' ),
+				),
+			),
+
+			'garan'     => array(
+				'title' => __( 'EU GARAN label', 'apg-legal-guarantee-notice' ),
+				'items' => array(
+					__( 'The label of the commercial guarantee of durability a producer can offer: free of charge, for the whole product and for more than two years. The guarantee is the producer\'s, so the label goes per product, with what the producer gives you; the shop should not go looking for it.', 'apg-legal-guarantee-notice' ),
+					__( 'EU GARAN tab', 'apg-legal-guarantee-notice' )      => __( 'in the product data box: the duration in years (more than two, in whole or half years such as 3, 5 or 2,5), the producer and the model identifier, the three editable fields of the label. The label stays off until the three are there. Each variation can set its own and inherits the rest from the product.', 'apg-legal-guarantee-notice' ),
+					__( 'Label from the producer', 'apg-legal-guarantee-notice' ) => __( 'if the producer gave you the label already filled in, upload it in the same tab and it is shown as it came instead of being drawn.', 'apg-legal-guarantee-notice' ),
+					__( 'How it is drawn', 'apg-legal-guarantee-notice' )   => __( 'on the Commission\'s own template, with only the three fields filled in and in the typeface the guidelines name, Inter. A value too long for its box is printed smaller rather than over the QR code, and the product screen warns you when that happens.', 'apg-legal-guarantee-notice' ),
+					__( 'Where it is shown', 'apg-legal-guarantee-notice' ) => __( 'on the product page, as the full label or as the nested one that opens it; before the place-order button, nested, one per product; as a line of text in the cart; on the order screen; and in the order email as an image, which needs the GD extension of PHP. Site Health tells you if it is missing.', 'apg-legal-guarantee-notice' ),
+				),
+			),
+
+			'invoices'  => array(
+				'title' => __( 'PDF invoices', 'apg-legal-guarantee-notice' ),
+				'items' => array(
+					__( 'For the invoices of PDF Invoices & Packing Slips for WooCommerce, by WP Overnight. The notice itself already travels as a PDF with the order email; the invoice gets a short reminder of the legal guarantee with the Your Europe link and the national note, and the EU GARAN label of each line in words.', 'apg-legal-guarantee-notice' ),
 				),
 			),
 
@@ -144,7 +174,7 @@ class APG_Guarantee_Help {
 					__( 'The notice is the Commission\'s and cannot be touched. These two texts are yours: the line that opens it and the national note printed beside it.', 'apg-legal-guarantee-notice' ),
 					__( 'Wording that opens it', 'apg-legal-guarantee-notice' )     => __( 'used by every placement, and the title of the modal. Leave it empty for the default wording.', 'apg-legal-guarantee-notice' ),
 					__( 'Show the note', 'apg-legal-guarantee-notice' )             => __( 'the official notice says "minimum two years" because that is the European floor and the file may not be edited. Where your own country grants longer, this is how you tell the customer, next to the notice and never inside it.', 'apg-legal-guarantee-notice' ),
-					__( 'Wording', 'apg-legal-guarantee-notice' )                   => __( 'the text of that note. Empty, it states the three years Article 120.1 TRLGDCU grants in Spain, and it arrives switched on when the shop sells from Spain. The country is read from your WooCommerce base location, never guessed from the language.', 'apg-legal-guarantee-notice' ),
+					__( 'Wording', 'apg-legal-guarantee-notice' )                   => __( 'the text of that note. Empty, it states the three years of Article 120.1 TRLGDCU in Spain, the three years of Decree-Law 84/2021 in Portugal or the three years to claim of the Swedish Consumer Sales Act, and it arrives switched on when the shop sells from one of those three countries. The country is read from your WooCommerce base location, never guessed from the language.', 'apg-legal-guarantee-notice' ),
 					__( 'Terms and conditions page', 'apg-legal-guarantee-notice' )  => __( 'linked from the national note, and the page the menu item points at. Defaults to the Terms and conditions page of WooCommerce, which is not the same thing as the privacy policy page.', 'apg-legal-guarantee-notice' ),
 					__( 'Create the page', 'apg-legal-guarantee-notice' )           => __( 'creates a published page holding the official notice and your guarantee terms, and selects it here. Uninstalling the plugin never deletes it: it is your content.', 'apg-legal-guarantee-notice' ),
 				),
@@ -159,9 +189,9 @@ class APG_Guarantee_Help {
 			),
 
 			'shortcodes' => array(
-				'title' => __( 'Shortcodes', 'apg-legal-guarantee-notice' ),
+				'title' => __( 'Shortcodes and blocks', 'apg-legal-guarantee-notice' ),
 				'items' => array(
-					__( 'For placing the notice somewhere the settings above do not reach.', 'apg-legal-guarantee-notice' ),
+					__( 'For placing the notice somewhere the settings above do not reach. The block editor has the same three as blocks (Legal guarantee notice, Legal guarantee button and Guarantee terms), plus the EU GARAN label block for the product template.', 'apg-legal-guarantee-notice' ),
 					'[apg_guarantee_notice]' => __( 'the official notice printed in the page, at full size, with the Your Europe link and the national note under it. For a page devoted to the guarantee, where the notice is the content rather than a reminder.', 'apg-legal-guarantee-notice' ),
 					'[apg_guarantee_terms]'  => __( 'your guarantee terms, the text above.', 'apg-legal-guarantee-notice' ),
 					'[apg_guarantee_button]' => __( 'the button that opens the notice in a modal. Accepts label, class and style, the same three styles as the placements.', 'apg-legal-guarantee-notice' ),
